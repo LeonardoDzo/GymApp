@@ -70,6 +70,22 @@ namespace GymApp.Models
         public string Email { get; set; }
 
         [Required]
+        [Display(Name = "Nombre")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Apellidos")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Número de Telefono")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        [Display(Name = "Rol")]
+        public string UserRoles { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2}.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]

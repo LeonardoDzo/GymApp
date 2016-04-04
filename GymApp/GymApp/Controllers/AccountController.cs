@@ -17,9 +17,10 @@ namespace GymApp.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        ApplicationDbContext context;
         public AccountController()
         {
+            context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -57,8 +58,12 @@ namespace GymApp.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            if(_userManager == null)
+            {
+                ViewBag.ReturnUrl = returnUrl;
+                return View();
+            }
+            return View("Index", "Home");
         }
 
         //
@@ -135,9 +140,11 @@ namespace GymApp.Controllers
         }
 
         // GET: /Account/Register
-        [Authorize(Roles = "Administrador")] 
+        [Authorize(Roles ="Administrador, Empleado")]
         public ActionResult Register()
         {
+            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Administrador"))
+                .ToList(), "Name", "Name");
             return View();
         }
 
@@ -150,20 +157,23 @@ namespace GymApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName,
+                                            LastName = model.LastName, PhoneNumber = model.PhoneNumber};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // Para obtener más información sobre cómo habilitar la confirmación de cuenta y el restablecimiento de contraseña, visite http://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar correo electrónico con este vínculo
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmar cuenta", "Para confirmar la cuenta, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
-
-                    return RedirectToAction("Index", "Home");
+                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
+                    return RedirectToAction("Register", "Account");
                 }
+                ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Administrador"))
+                .ToList(), "Name", "Name");
                 AddErrors(result);
             }
 

@@ -52,6 +52,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -170,12 +172,60 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MembresiasController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604030205185_InitialCreate.cs" />
+    <Compile Include="Migrations\201604030205185_InitialCreate.Designer.cs">
+      <DependentUpon>201604030205185_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604030341183_UpdateTable.cs" />
+    <Compile Include="Migrations\201604030341183_UpdateTable.Designer.cs">
+      <DependentUpon>201604030341183_UpdateTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604030356576_UpdateTable1.cs" />
+    <Compile Include="Migrations\201604030356576_UpdateTable1.Designer.cs">
+      <DependentUpon>201604030356576_UpdateTable1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRoles.cs">
+      <DependentUpon>ModelGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaims.cs">
+      <DependentUpon>ModelGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogins.cs">
+      <DependentUpon>ModelGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>ModelGym.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Membresias.cs">
+      <DependentUpon>ModelGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelGym.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelGym.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelGym.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelGym.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelGym.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserMembresias.cs">
+      <DependentUpon>ModelGym.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -186,8 +236,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\ModelGym.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelGym.edmx</DependentUpon>
+      <LastGenOutput>ModelGym.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModelGym.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelGym.edmx</DependentUpon>
+      <LastGenOutput>ModelGym.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\ModelGym.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelGym.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModelGym.edmx.diagram">
+      <DependentUpon>ModelGym.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -234,6 +301,15 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Membresias\Create.cshtml" />
+    <Content Include="Views\Membresias\Delete.cshtml" />
+    <Content Include="Views\Membresias\Details.cshtml" />
+    <Content Include="Views\Membresias\Edit.cshtml" />
+    <Content Include="Views\Membresias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -245,6 +321,20 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201604030205185_InitialCreate.resx">
+      <DependentUpon>201604030205185_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604030341183_UpdateTable.resx">
+      <DependentUpon>201604030341183_UpdateTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604030356576_UpdateTable1.resx">
+      <DependentUpon>201604030356576_UpdateTable1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
