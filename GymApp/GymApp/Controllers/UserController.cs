@@ -10,6 +10,7 @@ using System.Net;
 
 namespace GymApp.Controllers
 {
+    [Authorize(Roles ="Administrador, Empleado")]
     public class UserController : Controller
     {
         private dbGymEntities db = new dbGymEntities();
