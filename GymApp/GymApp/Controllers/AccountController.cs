@@ -15,6 +15,7 @@ namespace GymApp.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private dbGymEntities db = new dbGymEntities();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         ApplicationDbContext context;
@@ -143,8 +144,17 @@ namespace GymApp.Controllers
         [Authorize(Roles ="Administrador, Empleado")]
         public ActionResult Register()
         {
-            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Administrador"))
-                .ToList(), "Name", "Name");
+            ViewBag.Name1 = new SelectList((from u in db.Membresias select u.Nombre).ToList());
+            if (User.IsInRole("Administrador"))
+            {
+                ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Administrador"))
+                   .ToList(), "Name", "Name");
+            }else
+            {
+                ViewBag.Name = new SelectList(context.Roles.Where(u => u.Name.Contains("Normal"))
+                   .ToList(), "Name", "Name");
+            }  
+            
             return View();
         }
 
@@ -169,11 +179,36 @@ namespace GymApp.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmar cuenta", "Para confirmar la cuenta, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
+
+                    
+                    UserMembresias membre = new UserMembresias();
+                    try
+                    {
+                        if (model.Membresia != null )
+                        {
+                            membre.tipoMembresia = (from u in db.Membresias where u.Nombre == model.Membresia select u.id).First();
+                            membre.fInicio = model.fInicio;
+                            membre.ffin = model.FFin;
+                            membre.userid = user.Id;
+                            if (membre != null)
+                            {
+                                db.UserMembresias.Add(membre);
+                                db.SaveChanges();
+                            }
+                        }
+                    }
+                       
+                    catch (Exception e)
+                    {
+
+                    }
+                    
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
                     return RedirectToAction("Register", "Account");
                 }
                 ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Administrador"))
                 .ToList(), "Name", "Name");
+                ViewBag.Name1 = new SelectList((from u in db.Membresias select u.Nombre).ToList());
                 AddErrors(result);
             }
 

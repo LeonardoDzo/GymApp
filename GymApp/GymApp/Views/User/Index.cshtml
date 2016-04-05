@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GymApp.Models.AspNetUsers>
+﻿@model IEnumerable<GymApp.Models.UserViewModels>
 
 @{
     ViewBag.Title = "Index";
@@ -7,23 +7,36 @@
 <h2>Index</h2>
 
 <p>
-   @Html.ActionLink("Registrar nuevo usuario", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+    @Html.ActionLink("Registrar nuevo usuario", "Register", "Account")
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
-
         <th>
-           @Html.DisplayNameFor(model => model.PhoneNumber)
+            @Html.DisplayNameFor(model => model.PhoneNumber)
         </th>
-
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.LastName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipoMembresia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ffin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.userRol)
         </th>
         <th></th>
     </tr>
@@ -33,15 +46,29 @@
         <td>
             @Html.DisplayFor(modelItem => item.Email)
         </td>
-      
         <td>
             @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.LastName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipoMembresia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ffin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.userRol)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

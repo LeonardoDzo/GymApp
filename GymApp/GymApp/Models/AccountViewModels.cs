@@ -95,6 +95,12 @@ namespace GymApp.Models
         [Display(Name = "Confirmar contraseña")]
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
+        [Display(Name = "Membresia")]
+        public string Membresia { get; set; }
+        [Display(Name = "Fecha Inicio")]
+        public System.DateTime fInicio { get; set; }
+        [Display(Name = "Fecha Fin")]
+        public System.DateTime FFin { get; set; }
     }
 
     public class ResetPasswordViewModel

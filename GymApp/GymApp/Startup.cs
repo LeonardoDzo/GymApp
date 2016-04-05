@@ -40,6 +40,7 @@ namespace GymApp
                 if(chkuser.Succeeded)
                 {
                     var reulst1 = userManager.AddToRole(user.Id, "Administrador");
+                    
                 }
             }
 
