@@ -15,14 +15,15 @@ namespace GymApp.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Gimnasio que utiliza un sistema de acondicionamiento físico y \n" +
+               " fuerza basado en ejercicios constantemente variados, ejecutados a alta intensidad. ";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Kinetic Cross Training";
 
             return View();
         }

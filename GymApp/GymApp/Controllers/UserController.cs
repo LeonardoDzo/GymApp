@@ -18,6 +18,8 @@ namespace GymApp.Controllers
         // GET: User
         public ActionResult Index()
         {
+
+
             List<ICollection<AspNetUsers>> lista;
             if (User.IsInRole("Administrador"))
             {
@@ -28,16 +30,17 @@ namespace GymApp.Controllers
                 lista = (from u in db.AspNetRoles where u.Name == "Normal" select u.AspNetUsers).ToList();
                 
             }
+           
             usuarios = obtenerUsuarios(lista);
             return View(usuarios);
         }
         public List<UserViewModels> obtenerUsuarios(List<ICollection<AspNetUsers>> users)
         {
             int var1 = 1;
-            List<UserViewModels> listausuarios = new List< UserViewModels>(); 
+            List<UserViewModels> listausuarios = new List<UserViewModels>(); 
             foreach(var item in users.ToList())
             {
-                
+
                 foreach (var i in item)
                 {
                     UserViewModels usuarios = new UserViewModels();
@@ -87,6 +90,7 @@ namespace GymApp.Controllers
             }
             ViewBag.membresias = new SelectList((from u in db.Membresias select u.Nombre).ToList());
             ViewBag.rol = new SelectList((from u in db.AspNetRoles where u.Name != "Administrador" select u.Name).ToList());
+           
             UserViewModels usuario = (from u in usuarios where u.Id == id select u).FirstOrDefault();
             if (usuario == null)
             {
@@ -112,12 +116,13 @@ namespace GymApp.Controllers
                     usuario.LastName = model.LastName;
                     usuario.PhoneNumber = model.PhoneNumber;
                     usuario.UserName = model.Email;     
-                    if(usumem!= null)
+                    if(usumem != null)
                     {
                         usumem.tipoMembresia = (from u in db.Membresias where u.Nombre == model.tipoMembresia select u.id).First();
                         usumem.fInicio = model.fInicio;
                         usumem.ffin = model.ffin;
                         db.Entry(usumem).State = EntityState.Modified;
+                        db.SaveChanges();
                     }
                     
                     db.Entry(usuario).State = EntityState.Modified;

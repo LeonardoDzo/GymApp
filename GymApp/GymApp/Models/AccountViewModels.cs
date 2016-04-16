@@ -64,10 +64,14 @@ namespace GymApp.Models
 
     public class RegisterViewModel
     {
-        [Required]
+     
         [EmailAddress]
         [Display(Name = "Correo electrónico")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Nombre de Usuario")]
+        public string UserName { get; set; }
 
         [Required]
         [Display(Name = "Nombre")]
