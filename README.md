@@ -1,2 +1,2 @@
 # GymApp
-Aplicación web  de un gimnasio.
+Aplicación web en Asp mvc de un gimnasio.

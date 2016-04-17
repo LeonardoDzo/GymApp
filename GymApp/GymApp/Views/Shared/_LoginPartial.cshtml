@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNet.Identity
+@if (User.IsInRole("Administrador"))
+{
+    <ul class="nav navbar-nav navbar-left">
+        <li>@Html.ActionLink("Membresias", "Index", "Membresias")</li>
+        <li>@Html.ActionLink("Usuarios", "Index", "User")</li>
+        <li>@Html.ActionLink("Productos", "Index", "Products")</li>
+        <li>@Html.ActionLink("Ingresos", "Index", "Ingresos")</li>
+        <li>@Html.ActionLink("Egresos", "Index", "Egresos")</li>
+    </ul>
+}
+@if (User.IsInRole("Empleado"))
+{
+    <ul class="nav navbar-nav navbar-left">
+        <li>@Html.ActionLink("Usuarios", "Index", "User")</li>
+    </ul>
+}
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+             
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink("Hola " + User.Identity.Name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav">
+
+        <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
+        <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+       
+        <li>@Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}
