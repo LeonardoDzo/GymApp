@@ -170,9 +170,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EgresosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IngresosController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MembresiasController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -197,7 +200,13 @@
     <Compile Include="Models\AspNetUsers.cs">
       <DependentUpon>ModelGym.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Egresos.cs">
+      <DependentUpon>ModelGym.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Ingresos.cs">
+      <DependentUpon>ModelGym.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Membresias.cs">
       <DependentUpon>ModelGym.tt</DependentUpon>
@@ -217,10 +226,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelGym.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Products.cs">
+      <DependentUpon>ModelGym.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserMembresias.cs">
       <DependentUpon>ModelGym.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserViewModels.cs" />
+    <Compile Include="Models\Venta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -306,6 +319,22 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Egresos\Create.cshtml" />
+    <Content Include="Views\Egresos\Delete.cshtml" />
+    <Content Include="Views\Egresos\Details.cshtml" />
+    <Content Include="Views\Egresos\Edit.cshtml" />
+    <Content Include="Views\Egresos\Index.cshtml" />
+    <Content Include="Views\Ingresos\Create.cshtml" />
+    <Content Include="Views\Ingresos\Delete.cshtml" />
+    <Content Include="Views\Ingresos\Details.cshtml" />
+    <Content Include="Views\Ingresos\Edit.cshtml" />
+    <Content Include="Views\Ingresos\Index.cshtml" />
+    <Content Include="Views\Products\Venta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

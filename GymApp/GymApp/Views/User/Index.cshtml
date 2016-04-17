@@ -28,6 +28,9 @@
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.tipoMembresia)
             </th>
             <th>
@@ -61,6 +64,9 @@
                     @Html.DisplayFor(modelItem => item.FirstName)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.FechaNacimiento)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.tipoMembresia)
                 </td>
                 <td>
@@ -75,13 +81,15 @@
                 <td>
                     @if (User.IsInRole("Administrador"))
                     {
-                        @Html.ActionLink("Edit ", "Edit", new { id = item.Id }) <p>|</p>
-                       
-                        @Html.ActionLink("Delete ", "Delete", new { id = item.Id })<p>|</p>
+                        <p>
+                            @Html.ActionLink("Edit ", "Edit", new { id = item.Id }) |
 
+                            @Html.ActionLink("Delete ", "Delete", new { id = item.Id }) |
 
+                        </p>
                     }
                     @Html.ActionLink("Details", "Details", new { id = item.Id })
+                            
                     
                 </td>
             </tr>

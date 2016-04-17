@@ -64,14 +64,9 @@ namespace GymApp.Models
 
     public class RegisterViewModel
     {
-     
-        [EmailAddress]
+
         [Display(Name = "Correo electrónico")]
         public string Email { get; set; }
-
-        [Required]
-        [Display(Name = "Nombre de Usuario")]
-        public string UserName { get; set; }
 
         [Required]
         [Display(Name = "Nombre")]
@@ -81,7 +76,6 @@ namespace GymApp.Models
         [Display(Name = "Apellidos")]
         public string LastName { get; set; }
 
-        [Required]
         [Display(Name = "Número de Telefono")]
         public string PhoneNumber { get; set; }
 
@@ -99,6 +93,10 @@ namespace GymApp.Models
         [Display(Name = "Confirmar contraseña")]
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Fecha Nacimiento")]
+        public System.DateTime FechaNacimiento { get; set; }
+
         [Display(Name = "Membresia")]
         public string Membresia { get; set; }
         [Display(Name = "Fecha Inicio")]

@@ -29,5 +29,8 @@ namespace GymApp.Models
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Membresias> Membresias { get; set; }
         public virtual DbSet<UserMembresias> UserMembresias { get; set; }
+        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<Egresos> Egresos { get; set; }
+        public virtual DbSet<Ingresos> Ingresos { get; set; }
     }
 }

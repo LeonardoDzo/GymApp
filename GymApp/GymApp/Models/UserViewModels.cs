@@ -35,7 +35,10 @@ namespace GymApp.Models
      
         [Display(Name = "Fecha fin")]
         public System.DateTime ffin { get; set; }
-       
+
+        [Display(Name = "Fecha Nacimiento")]
+        public System.DateTime FechaNacimiento { get; set; }
+
         public string userRol { get; set; }
     }
 }

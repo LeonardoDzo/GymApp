@@ -18,8 +18,6 @@ namespace GymApp.Controllers
         // GET: User
         public ActionResult Index()
         {
-
-
             List<ICollection<AspNetUsers>> lista;
             if (User.IsInRole("Administrador"))
             {
@@ -45,7 +43,7 @@ namespace GymApp.Controllers
                 {
                     UserViewModels usuarios = new UserViewModels();
                     usuarios.Id = i.Id;
-                    usuarios.UserName = i.Email;
+                    usuarios.UserName = i.UserName;
                     usuarios.Email = i.Email;
                     usuarios.FirstName = i.FirstName;
                     usuarios.LastName = i.LastName;
@@ -53,7 +51,7 @@ namespace GymApp.Controllers
                     if (var1 == 1 && User.IsInRole("Administrador")) usuarios.userRol = "Empleado"; else usuarios.userRol = "Normal";
                     usuarios.tipoMembresia = (from u in db.UserMembresias where u.userid == i.Id select u.tipoMembresia ).FirstOrDefault().ToString();
                     usuarios.fInicio = (from u in db.UserMembresias where u.userid == i.Id select u.fInicio).FirstOrDefault();
-                    usuarios.ffin = (from u in db.UserMembresias where u.userid == i.Id select u.fInicio).FirstOrDefault();
+                    usuarios.ffin = (from u in db.UserMembresias where u.userid == i.Id select u.ffin).FirstOrDefault();
                     listausuarios.Add(usuarios);
                     usuarios = null;
                 }
@@ -114,15 +112,14 @@ namespace GymApp.Controllers
                     usuario.Email = model.Email;
                     usuario.FirstName = model.FirstName;
                     usuario.LastName = model.LastName;
-                    usuario.PhoneNumber = model.PhoneNumber;
-                    usuario.UserName = model.Email;     
+                    usuario.PhoneNumber = model.PhoneNumber;   
                     if(usumem != null)
                     {
                         usumem.tipoMembresia = (from u in db.Membresias where u.Nombre == model.tipoMembresia select u.id).First();
                         usumem.fInicio = model.fInicio;
                         usumem.ffin = model.ffin;
                         db.Entry(usumem).State = EntityState.Modified;
-                        db.SaveChanges();
+                        
                     }
                     
                     db.Entry(usuario).State = EntityState.Modified;
