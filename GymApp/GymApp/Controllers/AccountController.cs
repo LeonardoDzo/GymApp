@@ -89,7 +89,7 @@ namespace GymApp.Controllers
 
             // No cuenta los errores de inicio de sesión para el bloqueo de la cuenta
             // Para permitir que los errores de contraseña desencadenen el bloqueo de la cuenta, cambie a shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -193,36 +193,11 @@ namespace GymApp.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmar cuenta", "Para confirmar la cuenta, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
-
+                    await UserManager.AddToRoleAsync(user.Id, "Normal");
                     
-                    UserMembresias membre = new UserMembresias();
-                    try
-                    {
-                        if (model.Membresia != null )
-                        {
-                            membre.tipoMembresia = (from u in db.Membresias where u.Nombre == model.Membresia select u.id).First();
-                            membre.fInicio = model.fInicio;
-                            membre.ffin = model.FFin;
-                            membre.userid = user.Id;
-                            if (membre != null)
-                            {
-                                db.UserMembresias.Add(membre);
-                                db.SaveChanges();
-                            }
-                        }
-                    }
-                       
-                    catch (Exception e)
-                    {
-
-                    }
-                    
-                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
                     return RedirectToAction("Register", "Account");
                 }
-                ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Administrador"))
-                .ToList(), "Name", "Name");
-                ViewBag.Name1 = new SelectList((from u in db.Membresias select u.Nombre).ToList());
+             
                 AddErrors(result);
             }
 

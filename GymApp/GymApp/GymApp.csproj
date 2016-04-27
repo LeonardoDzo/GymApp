@@ -176,6 +176,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MembresiasController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\RegistroController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -227,6 +228,9 @@
       <DependentUpon>ModelGym.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Products.cs">
+      <DependentUpon>ModelGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Registro.cs">
       <DependentUpon>ModelGym.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserMembresias.cs">
@@ -335,9 +339,13 @@
     <Content Include="Views\Ingresos\Edit.cshtml" />
     <Content Include="Views\Ingresos\Index.cshtml" />
     <Content Include="Views\Products\Venta.cshtml" />
+    <Content Include="Views\Registro\Create.cshtml" />
+    <Content Include="Views\Registro\Index.cshtml" />
+    <Content Include="Views\Registro\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

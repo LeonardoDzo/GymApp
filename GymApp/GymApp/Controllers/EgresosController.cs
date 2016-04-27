@@ -20,6 +20,7 @@ namespace GymApp.Controllers
         {
             return View(await db.Egresos.ToListAsync());
         }
+        [HttpPost]
         public ActionResult Index(DateTime StartDate, DateTime StartEnd)
         {
             if (StartEnd == null || StartDate == null) return View(db.Egresos.ToList());
