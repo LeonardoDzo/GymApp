@@ -49,9 +49,8 @@ namespace GymApp.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Correo electrónico")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Nombre de Usuario")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -79,9 +78,8 @@ namespace GymApp.Models
         [Display(Name = "Número de Telefono")]
         public string PhoneNumber { get; set; }
 
-        [Required]
-        [Display(Name = "Rol")]
-        public string UserRoles { get; set; }
+        [Display(Name = "Fecha Nacimiento")]
+        public System.DateTime FechaNacimiento { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2}.", MinimumLength = 6)]
@@ -93,16 +91,6 @@ namespace GymApp.Models
         [Display(Name = "Confirmar contraseña")]
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
-
-        [Display(Name = "Fecha Nacimiento")]
-        public System.DateTime FechaNacimiento { get; set; }
-
-        [Display(Name = "Membresia")]
-        public string Membresia { get; set; }
-        [Display(Name = "Fecha Inicio")]
-        public System.DateTime fInicio { get; set; }
-        [Display(Name = "Fecha Fin")]
-        public System.DateTime FFin { get; set; }
     }
 
     public class ResetPasswordViewModel
