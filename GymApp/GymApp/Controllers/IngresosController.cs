@@ -18,7 +18,7 @@ namespace GymApp.Controllers
         // GET: Ingresos
         public ActionResult Index()
         {
-        
+            
             return View( db.Ingresos.ToList());
         }
         [HttpGet]

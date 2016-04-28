@@ -12,12 +12,9 @@ namespace GymApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Egresos
+    public partial class Categoria
     {
-        public int id { get; set; }
-        public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-        public double Monto { get; set; }
-        public System.DateTime Fecha { get; set; }
+        public int Id { get; set; }
+        public string Categoria1 { get; set; }
     }
 }

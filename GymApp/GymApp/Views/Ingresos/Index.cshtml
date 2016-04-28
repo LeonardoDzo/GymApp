@@ -5,26 +5,7 @@
 }
 
 <h2>Index</h2>
-@{
-    List<SelectListItem> listItems = new List<SelectListItem>();
-    listItems.Add(new SelectListItem
-    {
-        Text = "Producto",
-        Value = "Producto"
-    });
-    listItems.Add(new SelectListItem
-    {
-        Text = "Mebresia",
-        Value = "Mebresia"
-        
-    });
-    listItems.Add(new SelectListItem
-    {
-        Text = "Todos",
-        Value = "Todos",
-        Selected = true
-    });
-}
+
 
 @using (Html.BeginForm("Index", "Ingresos", FormMethod.Get))
 {

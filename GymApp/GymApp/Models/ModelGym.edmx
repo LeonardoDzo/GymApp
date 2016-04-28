@@ -41,6 +41,13 @@
           <Property Name="FechaNacimiento" Type="date" />
           <Property Name="accessControl" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Categoria" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="Egresos">
           <Key>
             <PropertyRef Name="id" />
@@ -168,6 +175,7 @@
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Egresos" EntityType="Self.Egresos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ingresos" EntityType="Self.Ingresos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Membresias" EntityType="Self.Membresias" Schema="dbo" store:Type="Tables" />
@@ -347,6 +355,7 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Registro" EntitySet="Registro" />
           </AssociationSet>
+          <EntitySet Name="Categoria" EntityType="dbGymModel.Categoria" />
         </EntityContainer>
         <Association Name="FK_Registro_AspNetUsers">
           <End Type="dbGymModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
@@ -360,6 +369,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Categoria1" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -468,6 +484,14 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="dbGymModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="Categoria1" ColumnName="Categoria" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
