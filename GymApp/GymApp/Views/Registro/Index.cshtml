@@ -5,7 +5,14 @@
 }
 
 <h2>Index</h2>
+@using (Html.BeginForm("Index", "Registro", FormMethod.Get))
+{
 
+    
+    @Html.TextBox("Nombre", "", new { @class = "form-control", @type = "text" })
+    @Html.TextBox("Apellidos", "", new { @class = "form-control", @type = "text" })
+    <input type="submit" value="Buscar" class="form-control" />
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>

@@ -5,11 +5,6 @@
 }
 
 <h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Nuevo Egreso", "Create")
-</p>
-
 @{
     List<SelectListItem> listItems = new List<SelectListItem>();
     listItems.Add(new SelectListItem
@@ -19,8 +14,8 @@
     });
     listItems.Add(new SelectListItem
     {
-        Text = "Mebresia",
-        Value = "Mebresia"
+        Text = "Membresia",
+        Value = "Membresia"
 
     });
     listItems.Add(new SelectListItem
@@ -36,15 +31,17 @@
         Selected = true
     });
 }
-
 @using (Html.BeginForm("Index", "Egresos", FormMethod.Get))
 {
 
     @Html.DropDownList("Tipo", listItems, new { @class = "form-control" });
     @Html.TextBox("StartDate", "", new { @class = "datepicker form-control", @type = "date" })
     @Html.TextBox("StartEnd", "", new { @class = "datepicker form-control", @type = "date" })
-    <input type="submit" value="Buscar" class="form-control" />
+    <input type="submit" id="enviar" value="Buscar" class="form-control" />
 }
+<p>
+    @Html.ActionLink("Nuevo Egreso", "Create")
+</p>
 
 <table class="table">
     <tr>
@@ -86,3 +83,4 @@
 }
 
 </table>
+

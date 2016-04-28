@@ -112,14 +112,26 @@ namespace GymApp.Controllers
                     usuario.Email = model.Email;
                     usuario.FirstName = model.FirstName;
                     usuario.LastName = model.LastName;
-                    usuario.PhoneNumber = model.PhoneNumber;   
+                    usuario.PhoneNumber = model.PhoneNumber;
+                    usuario.FechaNacimiento = model.FechaNacimiento;
                     if(usumem != null)
                     {
                         usumem.tipoMembresia = (from u in db.Membresias where u.Nombre == model.tipoMembresia select u.id).First();
                         usumem.fInicio = model.fInicio;
                         usumem.ffin = model.ffin;
                         db.Entry(usumem).State = EntityState.Modified;
-                        
+                        db.SaveChanges();
+
+                    }
+                    else
+                    {
+                        var temp = db.Membresias.Where(x => x.Nombre == model.tipoMembresia).FirstOrDefault();
+                        usumem.tipoMembresia = temp.id;
+                        temp = null;
+                        usumem.fInicio = model.fInicio;
+                        usumem.ffin = model.ffin;
+                        db.UserMembresias.Add(usumem);
+                        db.SaveChanges();
                     }
                     
                     db.Entry(usuario).State = EntityState.Modified;
@@ -130,8 +142,8 @@ namespace GymApp.Controllers
             }
             catch
             {
-                ViewBag.Name = new SelectList(from u in db.Membresias select u.Nombre).ToList();
-                ViewBag.rol = new SelectList(from u in db.AspNetRoles where u.Name != "Administrador" select u.Name).ToList();
+                ViewBag.membresias = new SelectList((from u in db.Membresias select u.Nombre).ToList());
+                ViewBag.rol = new SelectList((from u in db.AspNetRoles where u.Name != "Administrador" select u.Name).ToList());
                 return View();
             }
         }

@@ -20,6 +20,19 @@ namespace GymApp.Controllers
             var registro = db.Registro.Include(x=> x.AspNetUsers);
             return View(registro.ToList());
         }
+        [HttpGet]
+        public ActionResult Index(string Nombre, string Apellidos)
+        {
+            var registro = db.Registro.Include(x => x.AspNetUsers);
+            if(Nombre!="")
+                registro = registro.Where(x => x.AspNetUsers.FirstName == Nombre);
+
+            if (Apellidos!="")
+                registro = registro.Where(x => x.AspNetUsers.LastName == Apellidos);
+
+
+            return View(registro);
+        }
 
         // GET: Registro/Details/5
         public ActionResult Details(int? id)
