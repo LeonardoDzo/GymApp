@@ -79,11 +79,13 @@ namespace GymApp.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id,Name,Price,Quantity,Description")] Products products)
+        public async Task<ActionResult> Edit([Bind(Include = "id,Name,Price,Quantity,Description")] Products products, int Agregar)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && Agregar>=0)
             {
-                db.Entry(products).State = EntityState.Modified;
+                var pro = products;
+                pro.Quantity += Agregar;
+                db.Entry(pro).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -138,11 +140,11 @@ namespace GymApp.Controllers
             Ingresos nuevo = new Ingresos();
            
             int cant = (from u in db.Products where u.id == products.id select u.Quantity).First();
-            if (ModelState.IsValid && products.Quantity <= cant)
+            if (ModelState.IsValid && products.Quantity <= cant && products.Quantity > 0)
             {
-                nuevo.Nombre = products.Name;
+                nuevo.Nombre = "Producto";
                 nuevo.Monto = products.Quantity * products.Price;
-                nuevo.Descripcion = products.Description+ "por la cantidad de: " + products.Quantity;
+                nuevo.Descripcion = products.Name+ products.Description+ "por la cantidad de: " + products.Quantity;
                 nuevo.Fecha = System.DateTime.Now;
                 
                 db.Ingresos.Add(nuevo);

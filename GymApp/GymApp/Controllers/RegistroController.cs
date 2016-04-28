@@ -13,11 +13,11 @@ namespace GymApp.Controllers
     public class RegistroController : Controller
     {
         private dbGymEntities db = new dbGymEntities();
-
+        private static List<RegistroViewModel> listRegister = new List<RegistroViewModel>();
         // GET: Registro
         public ActionResult Index()
         {
-            var registro = db.AspNetUsers;
+            var registro = db.Registro.Include(x=> x.AspNetUsers);
             return View(registro.ToList());
         }
 
@@ -49,8 +49,10 @@ namespace GymApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(int accessControUser)
         {
-            if (ModelState.IsValid)
+            var verifica = (db.AspNetUsers.Count(x => x.accessControl == accessControUser))>=1 ? true: false;
+            if (ModelState.IsValid && verifica)
             {
+                Response.Write(@"<script language = 'javascript'>alert('Numero de Control de accesso Correcto, Registrado') </script>");
                 var register = new Registro();
                 register.date = System.DateTime.Now;
                 register.idUser = (from u in db.AspNetUsers where u.accessControl == accessControUser select u.Id).FirstOrDefault();
@@ -62,6 +64,9 @@ namespace GymApp.Controllers
                 }
                 
                 return RedirectToAction("Create");
+            }else
+            {
+                Response.Write(@"<script language = 'javascript'>alert('Numero de Control de accesso Incorrecto') </script>");
             }
 
             

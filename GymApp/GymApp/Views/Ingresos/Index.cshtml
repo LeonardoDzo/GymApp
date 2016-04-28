@@ -5,14 +5,34 @@
 }
 
 <h2>Index</h2>
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "Producto",
+        Value = "Producto"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Mebresia",
+        Value = "Mebresia"
+        
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Todos",
+        Value = "Todos",
+        Selected = true
+    });
+}
 
-
-@using (Html.BeginForm("Index", "Ingresos", FormMethod.Post))
+@using (Html.BeginForm("Index", "Ingresos", FormMethod.Get))
 {
 
-    @Html.TextBox("StartDate",string.Empty, new { @class = "datepicker", @type = "date" })
-    @Html.TextBox("StartEnd",string.Empty, new { @class = "datepicker", @type = "date" })
-    <input type="submit" value="Buscar" />
+    @Html.DropDownList("Tipo", listItems, new { @class= "form-control" });
+    @Html.TextBox("StartDate","", new { @class = "datepicker form-control", @type = "date" })
+    @Html.TextBox("StartEnd","", new { @class = "datepicker form-control", @type = "date" })
+    <input type="submit" value="Buscar" class="form-control"/>
 }
 <p>
     @Html.ActionLink("Nuevo ingreso", "Create")
@@ -58,8 +78,4 @@
 
 </table>
 
-<script>
-  $(function() {
-    $( ".datepicker" ).datepicker();
-  });
-</script>
+

@@ -11,11 +11,15 @@ namespace GymApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Products
     {
         public int id { get; set; }
+        [Required(ErrorMessage = "El nombre es requerido")]
+        [Display(Name = "Nombre", Description = "xxxxx")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "El nombre es requerido")]
+        [Display(Name = "Numero", Description = "$$")]
         public double Price { get; set; }
         public int Quantity { get; set; }
         public string Description { get; set; }

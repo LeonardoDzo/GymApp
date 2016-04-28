@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - GymApp</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/jquery-ui.css")
+    
     @Scripts.Render("~/bundles/modernizr")
+   
 
 </head>
 <body>
@@ -41,6 +44,9 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/jquery-1.10.2.js")
+    @Scripts.Render("~/Scripts/jquery-ui.js")
+    @Scripts.Render("~/Scripts/MyScript.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>

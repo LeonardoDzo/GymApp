@@ -16,16 +16,29 @@ namespace GymApp.Controllers
         private dbGymEntities db = new dbGymEntities();
 
         // GET: Egresos
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            return View(await db.Egresos.ToListAsync());
+           
+            return View(db.Egresos.ToList());
         }
-        [HttpPost]
-        public ActionResult Index(DateTime StartDate, DateTime StartEnd)
+        [HttpGet]
+        public ActionResult Index(DateTime? StartDate, DateTime? StartEnd, string Tipo)
         {
-            if (StartEnd == null || StartDate == null) return View(db.Egresos.ToList());
-            var ingresos = (from u in db.Egresos where u.Fecha >= StartDate && u.Fecha <= StartEnd orderby u.Fecha select u).ToList();
-            return View(ingresos);
+            var egresos = db.Egresos.ToList();
+            if (Tipo != "Todos")
+                egresos = egresos.Where(x => x.Nombre == Tipo).OrderBy(x => x.Fecha).ToList();
+
+
+            try
+            {
+                if (StartDate == null || StartDate == null) return View(egresos);
+                egresos = egresos.Where(x => x.Fecha >= StartDate && x.Fecha <= StartEnd).OrderBy(x => x.Fecha).ToList();
+                return View(egresos);
+            }
+            catch (Exception e)
+            {
+                return View(egresos);
+            }
         }
 
         // GET: Egresos/Details/5
@@ -58,6 +71,7 @@ namespace GymApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                egresos.Fecha = DateTime.Now;
                 db.Egresos.Add(egresos);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

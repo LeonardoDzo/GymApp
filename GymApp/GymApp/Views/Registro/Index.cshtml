@@ -18,7 +18,13 @@
             @Html.DisplayNameFor(model => model.date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.idUser)
+            @Html.DisplayNameFor(model => model.AspNetUsers.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUsers.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUsers.UserName)
         </th>
 
         <th></th>
@@ -33,7 +39,13 @@
             @Html.DisplayFor(modelItem => item.date)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.idUser)
+            @Html.DisplayFor(modelItem => item.AspNetUsers.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUsers.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUsers.UserName)
         </td>
         @*<td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |

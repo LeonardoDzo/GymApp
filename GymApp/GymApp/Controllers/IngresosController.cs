@@ -16,17 +16,31 @@ namespace GymApp.Controllers
         private dbGymEntities db = new dbGymEntities();
 
         // GET: Ingresos
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-
-            return View(await db.Ingresos.ToListAsync());
+        
+            return View( db.Ingresos.ToList());
         }
-        [HttpPost]
-        public ActionResult Index(DateTime StartDate, DateTime StartEnd)
+        [HttpGet]
+        public ActionResult Index(System.DateTime? StartDate, System.DateTime? StartEnd, string Tipo="Todos")
         {
-            if(StartEnd == null || StartDate == null) return View( db.Ingresos.ToList());
-            var ingresos = (from u in db.Ingresos where u.Fecha >= StartDate && u.Fecha <= StartEnd  orderby u.Fecha select u).ToList();
-            return View(ingresos);
+            var ingresos = db.Ingresos.ToList();
+            if (Tipo != "Todos")
+                ingresos = ingresos.Where(x => x.Nombre == Tipo).OrderBy(x=> x.Fecha).ToList() ;
+           
+               
+            try
+            {
+                if (StartDate == null || StartDate == null) return View(ingresos);
+                ingresos = ingresos.Where(x => x.Fecha >= StartDate && x.Fecha <= StartEnd).OrderBy(x => x.Fecha).ToList();
+                return View(ingresos);
+            }
+            catch (Exception e)
+            {
+                return View(ingresos);
+            }
+           
+            
         }
 
         // GET: Ingresos/Details/5
@@ -59,6 +73,7 @@ namespace GymApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                ingresos.Fecha = System.DateTime.Now;
                 db.Ingresos.Add(ingresos);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

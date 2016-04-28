@@ -16,6 +16,7 @@
         <AssociationConnector Association="dbGymModel.FK_UserMembresias_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="dbGymModel.FK_UserMembresias_Membresias" ManuallyRouted="false" />
         <AssociationConnector Association="dbGymModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="dbGymModel.FK_Registro_AspNetUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,5 +18,7 @@ namespace GymApp.Models
         public int accessControUser { get; set; }
         public string idUser { get; set; }
         public System.DateTime date { get; set; }
+    
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }
