@@ -97,6 +97,7 @@ namespace GymApp.Models
         public string ConfirmPassword { get; set; }
 
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name ="Fecha de Nacimiento")]
         public System.DateTime FechaNacimiento { get; set; }
     }

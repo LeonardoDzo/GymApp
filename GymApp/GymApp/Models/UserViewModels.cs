@@ -31,12 +31,16 @@ namespace GymApp.Models
         public string tipoMembresia { get; set; }
        
         [Display(Name = "Fecha de Inicio")]
+        [DisplayFormat(DataFormatString ="{0:yyyy-MM-dd}",ApplyFormatInEditMode =true)]
         public System.DateTime fInicio { get; set; }
      
         [Display(Name = "Fecha fin")]
+
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime ffin { get; set; }
 
         [Display(Name = "Fecha Nacimiento")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime FechaNacimiento { get; set; }
 
         public string userRol { get; set; }
