@@ -11,6 +11,8 @@ namespace GymApp.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public System.DateTime FechaNacimiento { get; set; } = System.DateTime.Parse("01/01/2000");
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

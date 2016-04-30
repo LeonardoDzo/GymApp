@@ -7,6 +7,8 @@ using System.Data;
 using System.Data.Entity;
 using GymApp.Models;
 using System.Net;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GymApp.Controllers
 {
@@ -38,7 +40,7 @@ namespace GymApp.Controllers
             List<UserViewModels> listausuarios = new List<UserViewModels>(); 
             foreach(var item in users.ToList())
             {
-
+                int l = item.Count();
                 foreach (var i in item)
                 {
                     UserViewModels usuarios = new UserViewModels();
@@ -48,8 +50,10 @@ namespace GymApp.Controllers
                     usuarios.FirstName = i.FirstName;
                     usuarios.LastName = i.LastName;
                     usuarios.PhoneNumber = i.PhoneNumber;
-                    if (var1 == 1 && User.IsInRole("Administrador")) usuarios.userRol = "Empleado"; else usuarios.userRol = "Normal";
-                    usuarios.tipoMembresia = (from u in db.UserMembresias where u.userid == i.Id select u.tipoMembresia ).FirstOrDefault().ToString();
+                    usuarios.FechaNacimiento = i.FechaNacimiento;
+                    usuarios.userRol = obtenerRol(usuarios.Id);
+                    int idMem = (from u in db.UserMembresias where u.userid == i.Id select u.tipoMembresia ).FirstOrDefault();
+                    usuarios.tipoMembresia = db.Membresias.Find(idMem).Nombre;
                     usuarios.fInicio = (from u in db.UserMembresias where u.userid == i.Id select u.fInicio).FirstOrDefault();
                     usuarios.ffin = (from u in db.UserMembresias where u.userid == i.Id select u.ffin).FirstOrDefault();
                     listausuarios.Add(usuarios);
@@ -77,7 +81,18 @@ namespace GymApp.Controllers
             return View(usuario);
            
         }
+        private string obtenerRol(string id)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
 
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var rolManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var oldUser = userManager.FindById(id);
+            var oldRolId = oldUser.Roles.SingleOrDefault().RoleId;
+            var oldRolName = db.AspNetRoles.SingleOrDefault(x => x.Id == oldRolId).Name;
+
+            return oldRolName;
+        }
         
         // GET: User/Edit/5
         public ActionResult Edit(string id)
@@ -114,23 +129,37 @@ namespace GymApp.Controllers
                     usuario.LastName = model.LastName;
                     usuario.PhoneNumber = model.PhoneNumber;
                     usuario.FechaNacimiento = model.FechaNacimiento;
-                    if(usumem != null)
+
+                    var rol = obtenerRol(usuario.Id);
+                    ApplicationDbContext context = new ApplicationDbContext();
+
+                    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                    var rolManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+                    if (rol!= model.userRol)
+                    {
+                        userManager.RemoveFromRole(usuario.Id, rol);
+                        userManager.AddToRole(usuario.Id, model.userRol);
+                    }
+
+
+                    if (usumem != null && model.tipoMembresia!="Ninguna")
                     {
                         usumem.tipoMembresia = (from u in db.Membresias where u.Nombre == model.tipoMembresia select u.id).First();
                         usumem.fInicio = model.fInicio;
                         usumem.ffin = model.ffin;
                         db.Entry(usumem).State = EntityState.Modified;
-                        db.SaveChanges();
 
                     }
-                    else
+                    else if(model.tipoMembresia != "Ninguna")
                     {
+                        UserMembresias usuarioMemb = new UserMembresias();
+                        usuarioMemb.userid = model.Id;
                         var temp = db.Membresias.Where(x => x.Nombre == model.tipoMembresia).FirstOrDefault();
-                        usumem.tipoMembresia = temp.id;
+                        usuarioMemb.tipoMembresia = temp.id;
                         temp = null;
-                        usumem.fInicio = model.fInicio;
-                        usumem.ffin = model.ffin;
-                        db.UserMembresias.Add(usumem);
+                        usuarioMemb.fInicio = model.fInicio;
+                        usuarioMemb.ffin = model.ffin;
+                        db.UserMembresias.Add(usuarioMemb);
                         db.SaveChanges();
                     }
                     
@@ -173,11 +202,18 @@ namespace GymApp.Controllers
             {
                 AspNetUsers user = (from u in db.AspNetUsers where u.Id == id select u).SingleOrDefault();
                 UserMembresias usumem = (from u in db.UserMembresias where u.userid == id select u).SingleOrDefault();
+                var regis = db.Registro.Where(x => x.idUser == id);
                 db.AspNetUsers.Remove(user);
                 if(usumem != null)
-                {
                     db.UserMembresias.Remove(usumem);
+                if (regis != null)
+                {
+                    foreach(var i in regis)
+                    {
+                        if (i.idUser == id) db.Registro.Remove(i);
+                    }
                 }
+                  
                
                 db.SaveChanges();
                 return RedirectToAction("Index");

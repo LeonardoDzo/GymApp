@@ -63,34 +63,42 @@ namespace GymApp.Models
 
     public class RegisterViewModel
     {
-
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Correo electrónico")]
         public string Email { get; set; }
 
         [Required]
+        [DataType(DataType.Text)]
+        [MaxLength(30)]
         [Display(Name = "Nombre")]
         public string FirstName { get; set; }
 
         [Required]
+        [DataType(DataType.Text)]
+        [MaxLength(30)]
         [Display(Name = "Apellidos")]
         public string LastName { get; set; }
-
+        [DataType(DataType.PhoneNumber)]
+        [MaxLength(10)]
         [Display(Name = "Número de Telefono")]
         public string PhoneNumber { get; set; }
-
-        [Display(Name = "Fecha Nacimiento")]
-        public System.DateTime FechaNacimiento { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2}.", MinimumLength = 6)]
         [DataType(DataType.Password)]
+        [MaxLength(20)]
         [Display(Name = "Contraseña")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
+        [MaxLength(20)]
         [Display(Name = "Confirmar contraseña")]
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name ="Fecha de Nacimiento")]
+        public System.DateTime FechaNacimiento { get; set; }
     }
 
     public class ResetPasswordViewModel

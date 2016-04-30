@@ -46,8 +46,7 @@ namespace GymApp
             // Configure la lógica de validación de nombres de usuario
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
-                AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = true
+                AllowOnlyAlphanumericUserNames = false
             };
 
             // Configure la lógica de validación de contraseñas

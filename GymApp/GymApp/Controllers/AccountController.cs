@@ -176,13 +176,11 @@ namespace GymApp.Controllers
             if (ModelState.IsValid)
             {
                 string[] apellidos = model.LastName.Split(' ');
-                string username1= model.FirstName;
+                string username1= model.FirstName + apellidos[0];
 
-                foreach (var i in apellidos) {
-                    username1 += i;
-                }
+               
                 var user = new ApplicationUser { UserName = username1, Email = model.Email, FirstName = model.FirstName,
-                                            LastName = model.LastName, PhoneNumber = model.PhoneNumber};
+                                            LastName = model.LastName, PhoneNumber = model.PhoneNumber,FechaNacimiento =model.FechaNacimiento };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -170,7 +170,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\EgresosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngresosController.cs" />
@@ -194,15 +193,16 @@
     <Compile Include="Migrations\201604030356576_UpdateTable1.Designer.cs">
       <DependentUpon>201604030356576_UpdateTable1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604290416285_FechaNacimiento.cs" />
+    <Compile Include="Migrations\201604290416285_FechaNacimiento.Designer.cs">
+      <DependentUpon>201604290416285_FechaNacimiento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>ModelGym.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUsers.cs">
-      <DependentUpon>ModelGym.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Categoria.cs">
       <DependentUpon>ModelGym.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Egresos.cs">
@@ -237,7 +237,6 @@
     <Compile Include="Models\Registro.cs">
       <DependentUpon>ModelGym.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RegistroViewModel.cs" />
     <Compile Include="Models\UserMembresias.cs">
       <DependentUpon>ModelGym.tt</DependentUpon>
     </Compile>
@@ -351,11 +350,6 @@
     <Content Include="Views\Registro\Create.cshtml" />
     <Content Include="Views\Registro\Index.cshtml" />
     <Content Include="Views\Registro\Details.cshtml" />
-    <Content Include="Views\Categorias\Create.cshtml" />
-    <Content Include="Views\Categorias\Delete.cshtml" />
-    <Content Include="Views\Categorias\Details.cshtml" />
-    <Content Include="Views\Categorias\Edit.cshtml" />
-    <Content Include="Views\Categorias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -377,6 +371,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604030356576_UpdateTable1.resx">
       <DependentUpon>201604030356576_UpdateTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604290416285_FechaNacimiento.resx">
+      <DependentUpon>201604290416285_FechaNacimiento.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

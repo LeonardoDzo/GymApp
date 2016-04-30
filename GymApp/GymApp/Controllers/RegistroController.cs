@@ -13,7 +13,7 @@ namespace GymApp.Controllers
     public class RegistroController : Controller
     {
         private dbGymEntities db = new dbGymEntities();
-        private static List<RegistroViewModel> listRegister = new List<RegistroViewModel>();
+       
         // GET: Registro
         public ActionResult Index()
         {
