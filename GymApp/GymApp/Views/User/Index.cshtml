@@ -5,7 +5,13 @@
 }
 
 <h2>Usuarios</h2>
+@using (Html.BeginForm("Index", "User", FormMethod.Get))
+{
 
+    @Html.TextBox("StartDate", "", new { @class = "datepicker form-control" })
+    @Html.TextBox("EndDate", "", new { @class = "datepicker form-control" })
+    <input type="submit" value="Buscar" class="form-control" />
+}
 <p>
     @Html.ActionLink("Registrar nuevo usuario", "Register", "Account")
 </p>
@@ -95,5 +101,7 @@
             </tr>
         }
     </table>
+    <br />
+    <label>Total: @ViewBag.SumaMembresias</label>
 </div>
 

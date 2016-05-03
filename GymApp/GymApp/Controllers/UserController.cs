@@ -18,9 +18,10 @@ namespace GymApp.Controllers
         private dbGymEntities db = new dbGymEntities();
         private static List<UserViewModels> usuarios;
         // GET: User
-        public ActionResult Index()
+        public ActionResult Index(System.DateTime? StartDate, System.DateTime? EndDate)
         {
             List<ICollection<AspNetUsers>> lista;
+
             if (User.IsInRole("Administrador"))
             {
                 lista = (from u in db.AspNetRoles where u.Name != "Administrador" select u.AspNetUsers).ToList();
@@ -32,7 +33,41 @@ namespace GymApp.Controllers
             }
            
             usuarios = obtenerUsuarios(lista);
-            return View(usuarios);
+
+            var filtro = usuarios;
+            double total = 0;
+           
+            if (StartDate != null && EndDate != null)
+            {
+                int meses = Math.Abs((StartDate.Value.Month - EndDate.Value.Month) + 12 * (StartDate.Value.Year - EndDate.Value.Year));
+
+                filtro = (from u in filtro where  u.userRol =="Normal"  select u).ToList();
+                foreach (var i in filtro)
+                {
+                    double monto = (from u in db.Membresias where u.Nombre == i.tipoMembresia  select u.Costo).First();
+                    
+                    if(i.ffin > EndDate)
+                    {
+                        if(i.fInicio < StartDate)
+                            meses = Math.Abs((StartDate.Value.Month - EndDate.Value.Month) + 12 * (StartDate.Value.Year - EndDate.Value.Year));
+                        else
+                            meses = Math.Abs((i.fInicio.Month - EndDate.Value.Month) + 12 * (i.fInicio.Year - EndDate.Value.Year));
+              
+                    }else
+                    {
+                        if (i.fInicio < StartDate)
+                            meses = Math.Abs((StartDate.Value.Month - i.ffin.Month) + 12 * (StartDate.Value.Year - i.ffin.Year));
+                        else
+                            meses = Math.Abs((i.fInicio.Month - i.ffin.Month) + 12 * (i.fInicio.Year - i.ffin.Year));
+                    }
+                    total += monto * meses;
+
+                }
+            }
+            
+            ViewBag.SumaMembresias = total;
+            
+            return View(filtro);
         }
         public List<UserViewModels> obtenerUsuarios(List<ICollection<AspNetUsers>> users)
         {
@@ -53,7 +88,12 @@ namespace GymApp.Controllers
                     usuarios.FechaNacimiento = i.FechaNacimiento;
                     usuarios.userRol = obtenerRol(usuarios.Id);
                     int idMem = (from u in db.UserMembresias where u.userid == i.Id select u.tipoMembresia ).FirstOrDefault();
-                    usuarios.tipoMembresia = db.Membresias.Find(idMem).Nombre;
+
+                    if (idMem > 0)
+                        usuarios.tipoMembresia = db.Membresias.Find(idMem).Nombre;
+                    else
+                        usuarios.tipoMembresia = "Ninguna";
+
                     usuarios.fInicio = (from u in db.UserMembresias where u.userid == i.Id select u.fInicio).FirstOrDefault();
                     usuarios.ffin = (from u in db.UserMembresias where u.userid == i.Id select u.ffin).FirstOrDefault();
                     listausuarios.Add(usuarios);
@@ -142,21 +182,43 @@ namespace GymApp.Controllers
                     }
 
 
-                    if (usumem != null && model.tipoMembresia!="Ninguna")
+                    if (usumem != null && model.userRol=="Normal")
                     {
-                        usumem.tipoMembresia = (from u in db.Membresias where u.Nombre == model.tipoMembresia select u.id).First();
-                        usumem.fInicio = model.fInicio;
-                        usumem.ffin = model.ffin;
-                        db.Entry(usumem).State = EntityState.Modified;
+                        if (model.tipoMembresia == null)
+                        {
+
+                            db.UserMembresias.Remove(usumem);
+
+                        }
+                        else
+                        {
+                            if (model.fInicio == null || model.ffin == null)
+                            {
+                                ViewBag.membresias = new SelectList((from u in db.Membresias select u.Nombre).ToList());
+                                ViewBag.rol = new SelectList((from u in db.AspNetRoles where u.Name != "Administrador" select u.Name).ToList());
+                                return View();
+                            }
+                            usumem.tipoMembresia = (from u in db.Membresias where u.Nombre == model.tipoMembresia select u.id).First();
+                            usumem.fInicio = model.fInicio;
+                            usumem.ffin = model.ffin;
+                            db.Entry(usumem).State = EntityState.Modified;
+                        }
+                       
 
                     }
-                    else if(model.tipoMembresia != "Ninguna")
+                    else if(model.tipoMembresia != null && model.userRol == "Normal")
                     {
                         UserMembresias usuarioMemb = new UserMembresias();
                         usuarioMemb.userid = model.Id;
                         var temp = db.Membresias.Where(x => x.Nombre == model.tipoMembresia).FirstOrDefault();
                         usuarioMemb.tipoMembresia = temp.id;
                         temp = null;
+                        if(model.fInicio == null || model.ffin == null)
+                        {
+                            ViewBag.membresias = new SelectList((from u in db.Membresias select u.Nombre).ToList());
+                            ViewBag.rol = new SelectList((from u in db.AspNetRoles where u.Name != "Administrador" select u.Name).ToList());
+                            return View();
+                        }
                         usuarioMemb.fInicio = model.fInicio;
                         usuarioMemb.ffin = model.ffin;
                         db.UserMembresias.Add(usuarioMemb);

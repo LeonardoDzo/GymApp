@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Edit";
+   
+
 }
 
 <h2>Editar</h2>
@@ -60,13 +62,14 @@
             @Html.LabelFor(model => model.FechaNacimiento, htmlAttributes: new { @class = " control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FechaNacimiento, new { htmlAttributes = new { @class = "datepicker form-control" } })
+                @Html.ValidationMessageFor(model => model.FechaNacimiento, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.tipoMembresia, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.tipoMembresia,(SelectList)ViewBag.membresias,new { htmlAttributes = new {  @class = "form-control" } })
+                @Html.DropDownListFor(m => m.tipoMembresia,(SelectList)ViewBag.membresias, "Ninguno", new {  @class = "form-control" } )
             </div>
         </div>
 
@@ -74,6 +77,7 @@
             @Html.LabelFor(model => model.fInicio, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.fInicio, new { htmlAttributes = new { @class = "datepicker form-control" } })
+                @Html.ValidationMessageFor(model => model.fInicio, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -81,19 +85,20 @@
             @Html.LabelFor(model => model.ffin, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ffin, new { htmlAttributes = new { @class = "datepicker form-control" } })
+                @Html.ValidationMessageFor(model => model.ffin, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.userRol, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.userRol, (SelectList)ViewBag.rol)
+                @Html.DropDownListFor(m => m.userRol, (SelectList)ViewBag.rol, new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" id="Enviar" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
