@@ -11,28 +11,31 @@ using GymApp.Models;
 
 namespace GymApp.Controllers
 {
+    [Authorize (Roles = "Administrador")]
     public class IngresosController : Controller
     {
         private dbGymEntities db = new dbGymEntities();
 
         // GET: Ingresos
         public ActionResult Index()
-        {
-            
+        { 
             return View( db.Ingresos.ToList());
         }
         [HttpGet]
-        public ActionResult Index(System.DateTime? StartDate, System.DateTime? StartEnd, string Tipo="Todos")
+        public ActionResult Index(System.DateTime? StartDate, System.DateTime? StartEnd, string Tipo="")
         {
+            ViewBag.tipo = new SelectList((from u in db.Categoria select u.Nombre).ToList());
             var ingresos = db.Ingresos.ToList();
-            if (Tipo != "Todos")
+            if (Tipo != "")
                 ingresos = ingresos.Where(x => x.Nombre == Tipo).OrderBy(x=> x.Fecha).ToList() ;
            
                
             try
             {
+                ViewBag.totalingresos = (ingresos.Sum(c => c.Monto));
                 if (StartDate == null || StartDate == null) return View(ingresos);
                 ingresos = ingresos.Where(x => x.Fecha >= StartDate && x.Fecha <= StartEnd).OrderBy(x => x.Fecha).ToList();
+                ViewBag.totalingresos = (ingresos.Sum(c => c.Monto));
                 return View(ingresos);
             }
             catch (Exception e)
@@ -61,6 +64,7 @@ namespace GymApp.Controllers
         // GET: Ingresos/Create
         public ActionResult Create()
         {
+            ViewBag.tipo = new SelectList((from u in db.Categoria select u.Nombre).ToList());
             return View();
         }
 
@@ -71,6 +75,7 @@ namespace GymApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "id,Nombre,Descripcion,Monto,Fecha")] Ingresos ingresos)
         {
+            ViewBag.tipo = new SelectList((from u in db.Categoria select u.Nombre).ToList());
             if (ModelState.IsValid)
             {
                 ingresos.Fecha = System.DateTime.Now;
@@ -85,6 +90,8 @@ namespace GymApp.Controllers
         // GET: Ingresos/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
+            ViewBag.tipo = new SelectList((from u in db.Categoria select u.Nombre).ToList());
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

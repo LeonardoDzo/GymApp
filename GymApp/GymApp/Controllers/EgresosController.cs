@@ -11,6 +11,7 @@ using GymApp.Models;
 
 namespace GymApp.Controllers
 {
+    [Authorize (Roles = "Administrador")]
     public class EgresosController : Controller
     {
         private dbGymEntities db = new dbGymEntities();
@@ -21,17 +22,24 @@ namespace GymApp.Controllers
             return View(db.Egresos.ToList());
         }
         [HttpGet]
-        public ActionResult Index(DateTime? StartDate, DateTime? StartEnd, string Tipo)
+        public ActionResult Index(DateTime? StartDate, DateTime? StartEnd, string Tipo = "")
         {
+            ViewBag.tipo = new SelectList((from u in db.Categoria select u.Nombre).ToList());
             var egresos = db.Egresos.ToList();
-            if (Tipo != "Todos")
+
+            if (Tipo != "")
+            {
                 egresos = egresos.Where(x => x.Nombre == Tipo).OrderBy(x => x.Fecha).ToList();
+            }
 
 
             try
             {
+                ViewBag.totalegresos = (egresos.Sum(c => c.Monto));
                 if (StartDate == null || StartDate == null) return View(egresos);
                 egresos = egresos.Where(x => x.Fecha >= StartDate && x.Fecha <= StartEnd).OrderBy(x => x.Fecha).ToList();
+                ViewBag.totalegresos = (egresos.Sum(c => c.Monto));
+
                 return View(egresos);
             }
             catch (Exception e)
@@ -58,6 +66,7 @@ namespace GymApp.Controllers
         // GET: Egresos/Create
         public ActionResult Create()
         {
+            ViewBag.tipo = new SelectList((from u in db.Categoria select u.Nombre).ToList());
             return View();
         }
 
@@ -68,6 +77,8 @@ namespace GymApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "id,Nombre,Descripcion,Monto,Fecha")] Egresos egresos)
         {
+            ViewBag.tipo = new SelectList((from u in db.Categoria select u.Nombre).ToList());
+
             if (ModelState.IsValid)
             {
                 egresos.Fecha = DateTime.Now;
@@ -82,6 +93,8 @@ namespace GymApp.Controllers
         // GET: Egresos/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
+            ViewBag.tipo = new SelectList((from u in db.Categoria select u.Nombre).ToList());
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

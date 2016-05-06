@@ -10,6 +10,7 @@ using GymApp.Models;
 
 namespace GymApp.Controllers
 {
+    [Authorize (Roles = "Administrador")]
     public class RegistroController : Controller
     {
         private dbGymEntities db = new dbGymEntities();

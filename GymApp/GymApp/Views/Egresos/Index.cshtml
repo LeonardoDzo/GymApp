@@ -5,36 +5,11 @@
 }
 
 <h2>Index</h2>
-@{
-    List<SelectListItem> listItems = new List<SelectListItem>();
-    listItems.Add(new SelectListItem
-    {
-        Text = "Producto",
-        Value = "Producto"
-    });
-    listItems.Add(new SelectListItem
-    {
-        Text = "Membresia",
-        Value = "Membresia"
 
-    });
-    listItems.Add(new SelectListItem
-    {
-        Text = "Otros",
-        Value = "Otros"
-
-    });
-    listItems.Add(new SelectListItem
-    {
-        Text = "Todos",
-        Value = "Todos",
-        Selected = true
-    });
-}
 @using (Html.BeginForm("Index", "Egresos", FormMethod.Get))
 {
 
-    @Html.DropDownList("Tipo", listItems, new { @class = "form-control" });
+    @Html.DropDownList("Tipo", (SelectList)ViewBag.tipo, "Todos", new { @class = "form-control" });
     @Html.TextBox("StartDate", "", new { @class = "datepicker form-control"})
     @Html.TextBox("StartEnd", "", new { @class = "datepicker form-control"})
     <input type="submit" id="enviar" value="Buscar" class="form-control" />
@@ -83,4 +58,5 @@
 }
 
 </table>
+<h3>Total: $@ViewBag.totalegresos</h3>
 

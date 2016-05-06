@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\EgresosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngresosController.cs" />
@@ -203,6 +204,9 @@
       <DependentUpon>ModelGym.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>ModelGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Categoria.cs">
       <DependentUpon>ModelGym.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Egresos.cs">
@@ -350,6 +354,11 @@
     <Content Include="Views\Registro\Create.cshtml" />
     <Content Include="Views\Registro\Index.cshtml" />
     <Content Include="Views\Registro\Details.cshtml" />
+    <Content Include="Views\Categorias\Create.cshtml" />
+    <Content Include="Views\Categorias\Delete.cshtml" />
+    <Content Include="Views\Categorias\Details.cshtml" />
+    <Content Include="Views\Categorias\Edit.cshtml" />
+    <Content Include="Views\Categorias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

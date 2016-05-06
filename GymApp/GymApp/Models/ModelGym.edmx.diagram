@@ -17,6 +17,7 @@
         <AssociationConnector Association="dbGymModel.FK_UserMembresias_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="dbGymModel.FK_UserMembresias_Membresias" ManuallyRouted="false" />
         <AssociationConnector Association="dbGymModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbGymModel.Categoria" Width="1.5" PointX="8.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

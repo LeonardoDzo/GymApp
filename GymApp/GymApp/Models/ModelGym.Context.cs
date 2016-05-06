@@ -33,5 +33,6 @@ namespace GymApp.Models
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Registro> Registro { get; set; }
         public virtual DbSet<UserMembresias> UserMembresias { get; set; }
+        public virtual DbSet<Categoria> Categoria { get; set; }
     }
 }

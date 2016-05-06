@@ -134,6 +134,7 @@ namespace GymApp.Controllers
             return oldRolName;
         }
         
+        [Authorize (Roles = "Administrador")]
         // GET: User/Edit/5
         public ActionResult Edit(string id)
         {
@@ -239,6 +240,7 @@ namespace GymApp.Controllers
             }
         }
 
+        [Authorize (Roles = "Administrador")]
         // GET: User/Delete/5
         public ActionResult Delete(string id)
         {
