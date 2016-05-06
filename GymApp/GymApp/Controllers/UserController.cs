@@ -44,7 +44,7 @@ namespace GymApp.Controllers
                 filtro = (from u in filtro where  u.userRol =="Normal"  select u).ToList();
                 foreach (var i in filtro)
                 {
-                    double monto = (from u in db.Membresias where u.Nombre == i.tipoMembresia  select u.Costo).First();
+                    double monto = (from u in db.Membresias where u.Nombre == i.tipoMembresia select u.Costo).FirstOrDefault();
                     
                     if(i.ffin > EndDate)
                     {
