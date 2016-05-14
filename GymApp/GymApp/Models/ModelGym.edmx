@@ -41,6 +41,14 @@
           <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
           <Property Name="accessControl" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="Aviso">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Aviso" Type="nvarchar(max)" />
+          <Property Name="ffin" Type="date" />
+        </EntityType>
         <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="Id" />
@@ -57,6 +65,13 @@
           <Property Name="Descripcion" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="Monto" Type="float" Nullable="false" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ejercicio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Ingresos">
           <Key>
@@ -95,6 +110,24 @@
           <Property Name="accessControUser" Type="int" Nullable="false" />
           <Property Name="idUser" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RendimientoEjercicio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ejercicioID" Type="int" Nullable="false" />
+          <Property Name="userID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PR" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rutina">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rutinas" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="fini" Type="datetime" />
         </EntityType>
         <EntityType Name="UserMembresias">
           <Key>
@@ -147,6 +180,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RendimientoEjercicio_Ejercicio">
+          <End Role="Ejercicio" Type="Self.Ejercicio" Multiplicity="1" />
+          <End Role="RendimientoEjercicio" Type="Self.RendimientoEjercicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ejercicio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RendimientoEjercicio">
+              <PropertyRef Name="ejercicioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserMembresias_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="UserMembresias" Type="Self.UserMembresias" Multiplicity="*" />
@@ -175,12 +220,16 @@
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Aviso" EntityType="Self.Aviso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Egresos" EntityType="Self.Egresos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ejercicio" EntityType="Self.Ejercicio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ingresos" EntityType="Self.Ingresos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Membresias" EntityType="Self.Membresias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Registro" EntityType="Self.Registro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RendimientoEjercicio" EntityType="Self.RendimientoEjercicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rutina" EntityType="Self.Rutina" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserMembresias" EntityType="Self.UserMembresias" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -193,6 +242,10 @@
           <AssociationSet Name="FK_Registro_AspNetUsers" Association="Self.FK_Registro_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Registro" EntitySet="Registro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RendimientoEjercicio_Ejercicio" Association="Self.FK_RendimientoEjercicio_Ejercicio">
+            <End Role="Ejercicio" EntitySet="Ejercicio" />
+            <End Role="RendimientoEjercicio" EntitySet="RendimientoEjercicio" />
           </AssociationSet>
           <AssociationSet Name="FK_UserMembresias_AspNetUsers" Association="Self.FK_UserMembresias_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -238,6 +291,7 @@
           <NavigationProperty Name="Registro" Relationship="Self.FK_Registro_AspNetUsers" FromRole="AspNetUsers" ToRole="Registro" />
           <NavigationProperty Name="UserMembresias" Relationship="Self.FK_UserMembresias_AspNetUsers" FromRole="AspNetUsers" ToRole="UserMembresias" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="RendimientoEjercicio" Relationship="dbGymModel.FK_RendimientoEjercicio_AspNetUsers" FromRole="AspNetUsers" ToRole="RendimientoEjercicio" />
         </EntityType>
         <EntityType Name="Egresos">
           <Key>
@@ -368,7 +422,19 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <EntitySet Name="Categoria" EntityType="dbGymModel.Categoria" />
-        </EntityContainer>
+          <EntitySet Name="Aviso" EntityType="dbGymModel.Aviso" />
+          <EntitySet Name="Ejercicio" EntityType="dbGymModel.Ejercicio" />
+          <EntitySet Name="Rutina" EntityType="dbGymModel.Rutina" />
+          <EntitySet Name="RendimientoEjercicio" EntityType="dbGymModel.RendimientoEjercicio" />
+          <AssociationSet Name="FK_RendimientoEjercicio_AspNetUsers" Association="dbGymModel.FK_RendimientoEjercicio_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="RendimientoEjercicio" EntitySet="RendimientoEjercicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RendimientoEjercicio_Ejercicio" Association="dbGymModel.FK_RendimientoEjercicio_Ejercicio">
+            <End Role="Ejercicio" EntitySet="Ejercicio" />
+            <End Role="RendimientoEjercicio" EntitySet="RendimientoEjercicio" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="Id" />
@@ -376,7 +442,67 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-      </Schema>
+        <EntityType Name="Aviso">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Aviso1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ffin" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Ejercicio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RendimientoEjercicio" Relationship="dbGymModel.FK_RendimientoEjercicio_Ejercicio" FromRole="Ejercicio" ToRole="RendimientoEjercicio" />
+        </EntityType>
+        <EntityType Name="Rutina">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rutinas" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fini" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="RendimientoEjercicio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ejercicioID" Type="Int32" Nullable="false" />
+          <Property Name="userID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PR" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AspNetUsers" Relationship="dbGymModel.FK_RendimientoEjercicio_AspNetUsers" FromRole="RendimientoEjercicio" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Ejercicio" Relationship="dbGymModel.FK_RendimientoEjercicio_Ejercicio" FromRole="RendimientoEjercicio" ToRole="Ejercicio" />
+        </EntityType>
+        <Association Name="FK_RendimientoEjercicio_AspNetUsers">
+          <End Type="dbGymModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="dbGymModel.RendimientoEjercicio" Role="RendimientoEjercicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RendimientoEjercicio">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RendimientoEjercicio_Ejercicio">
+          <End Type="dbGymModel.Ejercicio" Role="Ejercicio" Multiplicity="1" />
+          <End Type="dbGymModel.RendimientoEjercicio" Role="RendimientoEjercicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ejercicio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RendimientoEjercicio">
+              <PropertyRef Name="ejercicioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -492,7 +618,44 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Aviso">
+            <EntityTypeMapping TypeName="dbGymModel.Aviso">
+              <MappingFragment StoreEntitySet="Aviso">
+                <ScalarProperty Name="ffin" ColumnName="ffin" />
+                <ScalarProperty Name="Aviso1" ColumnName="Aviso" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ejercicio">
+            <EntityTypeMapping TypeName="dbGymModel.Ejercicio">
+              <MappingFragment StoreEntitySet="Ejercicio">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rutina">
+            <EntityTypeMapping TypeName="dbGymModel.Rutina">
+              <MappingFragment StoreEntitySet="Rutina">
+                <ScalarProperty Name="fini" ColumnName="fini" />
+                <ScalarProperty Name="Rutinas" ColumnName="Rutinas" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RendimientoEjercicio">
+            <EntityTypeMapping TypeName="dbGymModel.RendimientoEjercicio">
+              <MappingFragment StoreEntitySet="RendimientoEjercicio">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="PR" ColumnName="PR" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="ejercicioID" ColumnName="ejercicioID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
