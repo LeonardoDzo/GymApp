@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Data;
-using System.Data.Entity;
-using GymApp.Models;
-using System.Net;
+﻿using GymApp.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
 
 namespace GymApp.Controllers
 {
@@ -18,53 +17,43 @@ namespace GymApp.Controllers
         private dbGymEntities db = new dbGymEntities();
         private static List<UserViewModels> usuarios;
         // GET: User
-        public ActionResult Index(System.DateTime? StartDate, System.DateTime? EndDate)
+        public ActionResult Index(DateTime? StartDate, DateTime? EndDate, int vencimiento=0, bool Caducadas= false)
         {
             List<ICollection<AspNetUsers>> lista;
-
+            
             if (User.IsInRole("Administrador"))
-            {
                 lista = (from u in db.AspNetRoles where u.Name != "Administrador" select u.AspNetUsers).ToList();
-
-            }else
-            {
+            else
                 lista = (from u in db.AspNetRoles where u.Name == "Normal" select u.AspNetUsers).ToList();
-                
-            }
-           
-            usuarios = obtenerUsuarios(lista);
 
+            usuarios = obtenerUsuarios(lista);
+       
             var filtro = usuarios;
             double total = 0;
-           
+            int meses = 0;
             if (StartDate != null && EndDate != null)
             {
-                int meses = Math.Abs((StartDate.Value.Month - EndDate.Value.Month) + 12 * (StartDate.Value.Year - EndDate.Value.Year));
-
-                filtro = (from u in filtro where  u.userRol =="Normal"  select u).ToList();
-                foreach (var i in filtro)
-                {
-                    double monto = (from u in db.Membresias where u.Nombre == i.tipoMembresia select u.Costo).FirstOrDefault();
-                    
-                    if(i.ffin > EndDate)
-                    {
-                        if(i.fInicio < StartDate)
-                            meses = Math.Abs((StartDate.Value.Month - EndDate.Value.Month) + 12 * (StartDate.Value.Year - EndDate.Value.Year));
-                        else
-                            meses = Math.Abs((i.fInicio.Month - EndDate.Value.Month) + 12 * (i.fInicio.Year - EndDate.Value.Year));
-              
-                    }else
-                    {
-                        if (i.fInicio < StartDate)
-                            meses = Math.Abs((StartDate.Value.Month - i.ffin.Month) + 12 * (StartDate.Value.Year - i.ffin.Year));
-                        else
-                            meses = Math.Abs((i.fInicio.Month - i.ffin.Month) + 12 * (i.fInicio.Year - i.ffin.Year));
-                    }
-                    total += monto * meses;
-
-                }
+                meses = Math.Abs((StartDate.Value.Month - EndDate.Value.Month) + 
+                    12 * (StartDate.Value.Year - EndDate.Value.Year));
+                filtro = (from u in filtro where u.userRol == "Normal" && u.tipoMembresia != "Ninguna" 
+                          && u.fInicio >= StartDate && u.fInicio <= EndDate select u).ToList();
             }
-            
+                
+
+            if (vencimiento >0 )
+                filtro = (from u in filtro where u.userRol == "Normal" && u.tipoMembresia != "Ninguna" 
+                          && u.ffin >= DateTime.Now && u.ffin <= DateTime.Now.AddDays(vencimiento)
+                          select u).ToList();
+            if(Caducadas)
+                filtro = (from u in filtro where u.userRol == "Normal" && u.tipoMembresia != "Ninguna"
+                          && u.ffin <= DateTime.Now select u).ToList();
+
+            foreach (var i in filtro)
+            {
+                double monto = (from u in db.Membresias where u.Nombre == i.tipoMembresia select u.Costo).FirstOrDefault();
+                meses = Math.Abs((i.fInicio.Month - i.ffin.Month) + 12 * (i.fInicio.Year - i.ffin.Year));
+                total += monto * meses;
+            }
             ViewBag.SumaMembresias = total;
             
             return View(filtro);
@@ -87,6 +76,7 @@ namespace GymApp.Controllers
                     usuarios.PhoneNumber = i.PhoneNumber;
                     usuarios.FechaNacimiento = i.FechaNacimiento;
                     usuarios.userRol = obtenerRol(usuarios.Id);
+                    usuarios.accessControl = i.accessControl;
                     int idMem = (from u in db.UserMembresias where u.userid == i.Id select u.tipoMembresia ).FirstOrDefault();
 
                     if (idMem > 0)
@@ -133,7 +123,89 @@ namespace GymApp.Controllers
 
             return oldRolName;
         }
-        
+        [Authorize(Roles = "Administrador, Empleado")]
+        //GET: User/Membresia/?
+        public ActionResult Membresia(string id)
+        {
+          
+            UserMembresias membresia = db.UserMembresias.Where(x => x.userid == id).FirstOrDefault();
+            if (membresia != null)
+            {
+                ViewBag.tipoMembresia = new SelectList(db.Membresias, "id", "Nombre", membresia.tipoMembresia);
+            }else if(id!=string.Empty)
+            {
+                membresia = new UserMembresias();
+                membresia.tipoMembresia = db.Membresias.ToList().First().id;
+                membresia.userid = id;
+                db.UserMembresias.Add(membresia);
+                db.SaveChanges();
+                ViewBag.tipoMembresia = new SelectList(db.Membresias, "id", "Nombre","Ninguna");
+            }else
+            {
+                return RedirectToAction("Index");
+            }
+            
+            if (membresia == null)
+            {
+                return HttpNotFound();
+            }
+            return View(membresia);
+        }
+        [Authorize(Roles = "Administrador, Empleado")]
+        [HttpPost]
+        public ActionResult Membresia(UserMembresias model)
+        {
+            try
+            {
+                var usumem = (from u in db.UserMembresias where u.userid == model.userid select u).SingleOrDefault();
+
+                if (model != null)
+                {
+
+                    if (model.tipoMembresia == 0)
+                    {
+
+                        db.UserMembresias.Remove(usumem);
+
+                    }
+                    else
+                    {
+                        if (model.fInicio == null || model.ffin == null)
+                        {
+                            ViewBag.membresias = new SelectList((from u in db.Membresias select u.Nombre).ToList());
+                            return View();
+                        }
+                        usumem.tipoMembresia = model.tipoMembresia;
+                        usumem.fInicio = model.fInicio;
+                        usumem.ffin = model.ffin;
+                        db.Entry(usumem).State = EntityState.Modified;
+                        if( usumem.tipoMembresia != model.tipoMembresia || (model.ffin != usumem.ffin && model.fInicio != usumem.fInicio) && model.ffin > model.fInicio)
+                        {
+                            Ingresos ingreso = new Ingresos();
+                            ingreso.Fecha = DateTime.Now;
+                            int meses = Math.Abs((model.fInicio.Month - model.ffin.Month) + 12 * (model.fInicio.Year - model.ffin.Year));
+                            ingreso.Monto = db.Membresias.Where(x => x.id == model.tipoMembresia).First().Costo * meses;
+                            ingreso.Nombre = "Membresia";
+                            ingreso.Descripcion = "Se agrego una membresia del usaurio " + db.AspNetUsers.Find(usumem.userid).FirstName
+                                                + " " + db.AspNetUsers.Find(usumem.userid).LastName;
+                            db.Ingresos.Add(ingreso);
+                            ingreso = null;
+                        }
+                        
+                    }
+
+                }
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                ViewBag.membresias = new SelectList((from u in db.Membresias select u.Nombre).ToList());
+                ViewBag.rol = new SelectList((from u in db.AspNetRoles where u.Name != "Administrador" select u.Name).ToList());
+                return View();
+            }
+        }
+
         [Authorize (Roles = "Administrador")]
         // GET: User/Edit/5
         public ActionResult Edit(string id)
@@ -256,7 +328,6 @@ namespace GymApp.Controllers
             }
             return View(usuario);
         }
-
         // POST: User/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

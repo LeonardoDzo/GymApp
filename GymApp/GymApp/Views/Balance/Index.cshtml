@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "Balance";
+}
+
+<div class="form-group form-inline">
+    <br />
+    <div class="col col-lg-10">
+        <input class="datepicker form-control" id="StartDate"/>
+        <input class="datepicker form-control" id="EndDate" />
+        <input type="submit" id="Enviar" class="btn btn-success"/>
+        <button id="generar" class="btn btn-info">Generar</button>
+    </div>
+</div>
+<hr />
+<div class="container" id="PDF">
+    <div class="row">
+        <div id="fechas"></div>
+    </div>
+    <br />
+    <div class="row">
+        <div id="Ingresos" class="col-lg-10">
+        </div>
+        <div id="Egresos" class="col-lg-10">
+        </div>
+
+    </div>
+</div>
+<div id="editor"></div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/jquery-1.10.2.js")
+    <script type="text/javascript" src="//cdn.rawgit.com/MrRio/jsPDF/master/dist/jspdf.min.js"></script> 
+    <script type="text/javascript" src="//cdn.rawgit.com/niklasvh/html2canvas/0.5.0-alpha2/dist/html2canvas.min.js"></script>
+        <script type="text/javascript">
+        $("#Enviar").click(function () {
+            _VistasParciales();
+            var html = $("#PDF").html();
+            console.log(html);
+        });
+     
+        (function () {
+            var
+             form = $('#PDF'),
+             cache_width = form.width(),
+             a4 = [595.28, 841.89];  // for a4 size paper width and height
+
+            $('#generar').on('click', function () {
+                $('body').scrollTop(0);
+                createPDF();
+            });
+            //create pdf
+            function createPDF() {
+                getCanvas().then(function (canvas) {
+                    var
+                    img = canvas.toDataURL("image/png"),
+                    doc = new jsPDF({
+                        unit: 'px',
+                        format: 'a4'
+                    });
+                    var fecha = new Date();
+                    doc.addImage(img, 'JPEG', 20, 20);
+                    doc.save('Balancede' + $("#StartDate").val() +'to' +$("#EndDate").val()+'.pdf');
+                    form.width(cache_width);
+                });
+            }
+
+            // create canvas object
+            function getCanvas() {
+                form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');
+                return html2canvas(form, {
+                    imageTimeout: 2000,
+                    removeContainer: true
+                });
+            }
+
+        }());
+        $(document).ready(function () {
+            _VistasParciales();
+        });
+        function _VistasParciales() {
+            $('#fechas').empty();
+            $('#fechas').html('<br/><h2>Balance</h2><br/> <h2>Kinnetic Crosfit</h2><br/><h3>Estado de Resultado del ' + $("#StartDate").val() + ' al ' + $("#EndDate").val());
+            $('#Ingresos').empty();
+            $('#Ingresos').load("/Balance/_balanceIngresos?StartDate=" + $("#StartDate").val() + "&EndDate=" + $("#EndDate").val());
+            $('#Egresos').empty();
+            $('#Egresos').load("/Balance/_balanceEgresos?StartDate=" + $("#StartDate").val() + "&EndDate=" + $("#EndDate").val());
+        }
+   
+        
+
+    </script>
+}
+
+

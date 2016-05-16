@@ -15,14 +15,9 @@ namespace GymApp.Controllers
     {
         private dbGymEntities db = new dbGymEntities();
        
-        // GET: Registro
-        public ActionResult Index()
-        {
-            var registro = db.Registro.Include(x=> x.AspNetUsers);
-            return View(registro.ToList());
-        }
+   
         [HttpGet]
-        public ActionResult Index(string Nombre, string Apellidos)
+        public ActionResult Index(string Nombre="", string Apellidos="")
         {
             var registro = db.Registro.Include(x => x.AspNetUsers);
             if(Nombre!="")

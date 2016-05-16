@@ -256,7 +256,7 @@ namespace GymApp.Controllers
             }
             catch (Exception e)
             {
-                Response.Write("<script text/javascript>alert('No se envio')</script>");
+                Response.Write("<script text/javascript>alert('No se envio por"+e+"')</script>");
                 return View();
 
             }

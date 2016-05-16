@@ -1,0 +1,57 @@
+﻿@model IEnumerable<GymApp.Models.Balance>
+
+<h3>Egresos</h3>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                $@Html.DisplayFor(modelItem => item.total)
+            </td>
+
+        </tr>
+    }
+    <tr>
+        <td>
+            <h3>Total Egresos</h3>
+        </td>
+        <td>
+            <h3>$@ViewBag.Total</h3>
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+           
+        </td>
+        <td>
+            
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            <h2>Total</h2>
+        </td>
+        <td>
+            <h2>$@ViewBag.Total2</h2>
+        </td>
+
+    </tr>
+
+</table>
+

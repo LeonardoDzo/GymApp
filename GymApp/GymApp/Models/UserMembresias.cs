@@ -9,15 +9,17 @@
 
 namespace GymApp.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class UserMembresias
     {
         public int Id { get; set; }
         public string userid { get; set; }
         public int tipoMembresia { get; set; }
+        [Display(Name = "Fecha de Inicio")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime fInicio { get; set; }
+        [Display(Name = "Fecha Fin")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime ffin { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }

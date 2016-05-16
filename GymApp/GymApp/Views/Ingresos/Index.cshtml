@@ -10,7 +10,7 @@
 @using (Html.BeginForm("Index", "Ingresos", FormMethod.Get))
 {
 
-    @Html.DropDownList("Tipo", (SelectList)ViewBag.tipo, "Todos", new { @class = "form-control" });
+    @Html.DropDownList("Tipo", (SelectList)ViewBag.tipo, "Todos", new { @class = "btn-default dropdown-toggle" });
     @Html.TextBox("StartDate","", new { @class = "datepicker form-control", @type = "date" })
     @Html.TextBox("StartEnd","", new { @class = "datepicker form-control", @type = "date" })
     <input type="submit" value="Buscar" class="form-control"/>

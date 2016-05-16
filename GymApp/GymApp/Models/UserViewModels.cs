@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace GymApp.Models
 {
@@ -16,6 +12,7 @@ namespace GymApp.Models
         public string Email { get; set; }
         [Required]
         [Display(Name = "Número de Télefono")]
+        [Phone]
         public string PhoneNumber { get; set; }
         [Required]
         [Display(Name = "Nombre de usuario")]
@@ -42,7 +39,9 @@ namespace GymApp.Models
         [Display(Name = "Fecha Nacimiento")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime FechaNacimiento { get; set; }
-
+        [Display(Name = "Rol")]
         public string userRol { get; set; }
+        [Display(Name = "Acceso de Control")]
+        public int accessControl { get; set; }
     }
 }

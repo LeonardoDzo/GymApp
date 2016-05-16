@@ -34,5 +34,7 @@ namespace GymApp.Models
         public virtual DbSet<Registro> Registro { get; set; }
         public virtual DbSet<UserMembresias> UserMembresias { get; set; }
         public virtual DbSet<Categoria> Categoria { get; set; }
+
+        public System.Data.Entity.DbSet<GymApp.Models.BalanceViewModel> BalanceViewModels { get; set; }
     }
 }

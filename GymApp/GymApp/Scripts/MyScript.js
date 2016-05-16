@@ -1,5 +1,4 @@
-﻿$(function () {
-   
+﻿ 
     $(".datepicker").datepicker({
         dateFormat: "yy-mm-dd",
         changeYear: true,
@@ -7,7 +6,6 @@
         showWeek: true
     });
     $(".numeric").numeric();
-});
 
 $('#Enviar').click(function () {
     var fecha1 = $('#fInicio').val();
