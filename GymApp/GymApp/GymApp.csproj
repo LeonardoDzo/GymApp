@@ -400,6 +400,7 @@
     <Content Include="Views\RendimientoEjercicios\Details.cshtml" />
     <Content Include="Views\RendimientoEjercicios\Edit.cshtml" />
     <Content Include="Views\RendimientoEjercicios\Index.cshtml" />
+    <Content Include="Views\RendimientoEjercicios\_Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -27,8 +27,24 @@ namespace GymApp.Controllers
                 .FirstOrDefault());
             // esta linea muestra todos los ejercicios por usuario
             // var rendimientoEjercicio = (from u in db.RendimientoEjercicio where u.AspNetUsers.UserName == User.Identity.Name select u); 
+            ViewBag.ejercicioID = new SelectList(db.Ejercicio, "Id", "Nombre");
+
             return View(result.ToList());
         }
+
+        public ActionResult _Index(int? ejercicioID)
+        {
+
+            //var result = db.RendimientoEjercicio.Where(u => u.AspNetUsers.UserName == User.Identity.Name)
+            //    .GroupBy(x => x.ejercicioID, (key, g) =>
+            //    g.OrderByDescending(e => e.Id)
+            //    .FirstOrDefault());
+            // esta linea muestra todos los ejercicios por usuario
+            var rendimientoEjercicio = (from u in db.RendimientoEjercicio where u.AspNetUsers.UserName == User.Identity.Name && u.ejercicioID == ejercicioID select u);
+
+            return View(rendimientoEjercicio.ToList());
+        }
+
 
         // GET: RendimientoEjercicios/Details/5
         public ActionResult Details(int? id)
