@@ -14,6 +14,7 @@ namespace GymApp.Models
     {
         public int Id { get; set; }
         public string userid { get; set; }
+        [Display(Name = "Tipo de membresia",ShortName ="Membresia")]
         public int tipoMembresia { get; set; }
         [Display(Name = "Fecha de Inicio")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

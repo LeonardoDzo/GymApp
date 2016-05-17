@@ -11,10 +11,11 @@ namespace GymApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Aviso
     {
         public int Id { get; set; }
+        [Display(Name = "Aviso")]
         public string Aviso1 { get; set; }
         public Nullable<System.DateTime> ffin { get; set; }
     }

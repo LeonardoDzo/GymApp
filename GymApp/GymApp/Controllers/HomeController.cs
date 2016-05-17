@@ -11,7 +11,7 @@ namespace GymApp.Controllers
 {
     public class HomeController : Controller
     {
-        [Authorize]
+       
         public ActionResult Index()
         {
             if (User.IsInRole("Normal")){

@@ -144,7 +144,7 @@ namespace GymApp.Controllers
             {
                 nuevo.Nombre = "Producto";
                 nuevo.Monto = products.Quantity * products.Price;
-                nuevo.Descripcion = products.Name+ products.Description+ "por la cantidad de: " + products.Quantity;
+                nuevo.Descripcion = products.Name+ " "+ products.Description+ " por la cantidad de: " + products.Quantity;
                 nuevo.Fecha = System.DateTime.Now;
                 
                 db.Ingresos.Add(nuevo);

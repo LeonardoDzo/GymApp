@@ -11,7 +11,7 @@ namespace GymApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Membresias
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,8 +21,15 @@ namespace GymApp.Models
         }
     
         public int id { get; set; }
+        [MaxLength(20)]
+        [Required]
+        [DataType(DataType.Text)]
         public string Nombre { get; set; }
+        [Required]
         public string Turno { get; set; }
+        [DataType(DataType.Currency)]
+        [Required]
+        [Display(Name = "Precio")]
         public double Costo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

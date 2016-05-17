@@ -11,13 +11,18 @@ namespace GymApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Ingresos
     {
         public int id { get; set; }
+        [MaxLength(20)]
+        [Display(Name = "Tipo")]
         public string Nombre { get; set; }
+        [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
+        [DataType(DataType.Currency)]
         public double Monto { get; set; }
+        [DataType(DataType.DateTime)]
         public System.DateTime Fecha { get; set; }
     }
 }

@@ -39,6 +39,6 @@ namespace GymApp.Models
         public virtual DbSet<Rutina> Rutina { get; set; }
         public virtual DbSet<RendimientoEjercicio> RendimientoEjercicio { get; set; }
 
-        public System.Data.Entity.DbSet<GymApp.Models.BalanceViewModel> BalanceViewModels { get; set; }
+   
     }
 }

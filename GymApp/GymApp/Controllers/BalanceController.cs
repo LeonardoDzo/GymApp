@@ -2,15 +2,11 @@
 using System.Web.Mvc;
 using System.Data;
 using GymApp.Models;
-using iTextSharp;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using System;
-using HiQPdf;
 using System.Collections.Generic;
 
 namespace GymApp.Controllers
 {
+    [Authorize(Roles ="Administrador")]
     public class BalanceController : Controller
     {
         private dbGymEntities db = new dbGymEntities();

@@ -179,15 +179,16 @@ namespace GymApp.Controllers
                         usumem.fInicio = model.fInicio;
                         usumem.ffin = model.ffin;
                         db.Entry(usumem).State = EntityState.Modified;
-                        if( usumem.tipoMembresia != model.tipoMembresia || (model.ffin != usumem.ffin && model.fInicio != usumem.fInicio) && model.ffin > model.fInicio)
+                        if( usumem.tipoMembresia != model.tipoMembresia || (model.ffin != usumem.ffin && model.fInicio != usumem.fInicio) || model.ffin > model.fInicio)
                         {
                             Ingresos ingreso = new Ingresos();
                             ingreso.Fecha = DateTime.Now;
                             int meses = Math.Abs((model.fInicio.Month - model.ffin.Month) + 12 * (model.fInicio.Year - model.ffin.Year));
                             ingreso.Monto = db.Membresias.Where(x => x.id == model.tipoMembresia).First().Costo * meses;
                             ingreso.Nombre = "Membresia";
-                            ingreso.Descripcion = "Se agrego una membresia del usaurio " + db.AspNetUsers.Find(usumem.userid).FirstName
-                                                + " " + db.AspNetUsers.Find(usumem.userid).LastName;
+                            ingreso.Descripcion = "Se agrego una membresia del usuario " + db.AspNetUsers.Find(usumem.userid).FirstName+" de tipo " 
+                                                + " " + db.AspNetUsers.Find(usumem.userid).LastName + " " 
+                                                + (from u in db.Membresias where u.id == model.tipoMembresia select u.Nombre).First();
                             db.Ingresos.Add(ingreso);
                             ingreso = null;
                         }

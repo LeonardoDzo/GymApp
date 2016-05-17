@@ -9,15 +9,22 @@
 
 namespace GymApp.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Products
     {
         public int id { get; set; }
+        [MaxLength(50)]
+        [Required]
+        [Display(Name="Nombre")]
         public string Name { get; set; }
+        [DataType(DataType.Currency)]
+        [Display(Name = "Precio")]
         public double Price { get; set; }
+        [Display(Name = "Cantidad")]
         public int Quantity { get; set; }
+        [DataType(DataType.Text)]
+        [MaxLength(150)]
+        [Display(Name = "Descripción")]
         public string Description { get; set; }
     }
 }

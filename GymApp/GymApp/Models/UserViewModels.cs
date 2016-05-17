@@ -10,7 +10,7 @@ namespace GymApp.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
-        [Required]
+
         [Display(Name = "Número de Télefono")]
         [Phone]
         public string PhoneNumber { get; set; }

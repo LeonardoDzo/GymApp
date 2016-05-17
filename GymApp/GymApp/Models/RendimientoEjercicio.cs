@@ -11,13 +11,17 @@ namespace GymApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class RendimientoEjercicio
     {
         public int Id { get; set; }
+        [Display(Name = "Ejercicio")]
         public int ejercicioID { get; set; }
         public string userID { get; set; }
+        [Display(Name = "Record")]
         public string PR { get; set; }
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Fecha")]
         public System.DateTime fecha { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }

@@ -7,14 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace GymApp.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class Registro
     {
         public int id { get; set; }
+        [Display(Name = "Número de Membresia")]
         public int accessControUser { get; set; }
         public string idUser { get; set; }
         public System.DateTime date { get; set; }

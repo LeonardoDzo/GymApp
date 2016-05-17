@@ -64,6 +64,8 @@ namespace GymApp.Models
     public class RegisterViewModel
     {
         [DataType(DataType.EmailAddress)]
+        [EmailAddress]
+        [MaxLength(100)]
         [Display(Name = "Correo electrónico")]
         public string Email { get; set; }
 
@@ -80,6 +82,7 @@ namespace GymApp.Models
         public string LastName { get; set; }
         [DataType(DataType.PhoneNumber)]
         [MaxLength(10)]
+        [Phone]
         [Display(Name = "Número de Telefono")]
         public string PhoneNumber { get; set; }
 
