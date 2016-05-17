@@ -20,6 +20,7 @@ namespace GymApp.Models
             this.Registro = new HashSet<Registro>();
             this.UserMembresias = new HashSet<UserMembresias>();
             this.AspNetRoles = new HashSet<AspNetRoles>();
+            this.RendimientoEjercicio = new HashSet<RendimientoEjercicio>();
         }
     
         public string Id { get; set; }
@@ -45,5 +46,7 @@ namespace GymApp.Models
         public virtual ICollection<UserMembresias> UserMembresias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RendimientoEjercicio> RendimientoEjercicio { get; set; }
     }
 }

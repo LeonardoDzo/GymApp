@@ -1,0 +1,61 @@
+﻿@model GymApp.Models.RendimientoEjercicio
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RendimientoEjercicio</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ejercicio.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ejercicio.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUsers.Email)
+        </dd>*@
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -178,15 +178,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AvisosController.cs" />
     <Compile Include="Controllers\BalanceController.cs" />
     <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\EgresosController.cs" />
+    <Compile Include="Controllers\EjerciciosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngresosController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MembresiasController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegistroController.cs" />
+    <Compile Include="Controllers\RendimientoEjerciciosController.cs" />
+    <Compile Include="Controllers\RutinasController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="dbGymDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -196,6 +200,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="mailConfig.cs" />
     <Compile Include="Migrations\201604030205185_InitialCreate.cs" />
     <Compile Include="Migrations\201604030205185_InitialCreate.Designer.cs">
       <DependentUpon>201604030205185_InitialCreate.cs</DependentUpon>
@@ -220,12 +225,18 @@
     <Compile Include="Models\AspNetUsers.cs">
       <DependentUpon>ModelGym.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Aviso.cs">
+      <DependentUpon>ModelGym.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Balance.cs" />
     <Compile Include="Models\BalanceViewModel.cs" />
     <Compile Include="Models\Categoria.cs">
       <DependentUpon>ModelGym.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Egresos.cs">
+      <DependentUpon>ModelGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ejercicio.cs">
       <DependentUpon>ModelGym.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -255,6 +266,12 @@
       <DependentUpon>ModelGym.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Registro.cs">
+      <DependentUpon>ModelGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RendimientoEjercicio.cs">
+      <DependentUpon>ModelGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rutina.cs">
       <DependentUpon>ModelGym.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserMembresias.cs">
@@ -387,6 +404,31 @@
     <Content Include="Views\Categorias\Details.cshtml" />
     <Content Include="Views\Categorias\Edit.cshtml" />
     <Content Include="Views\Categorias\Index.cshtml" />
+    <Content Include="Views\Home\IndexUser.cshtml" />
+    <Content Include="Views\Home\_sectionUser.cshtml" />
+    <Content Include="Views\Avisos\Create.cshtml" />
+    <Content Include="Views\Avisos\Delete.cshtml" />
+    <Content Include="Views\Avisos\Details.cshtml" />
+    <Content Include="Views\Avisos\Edit.cshtml" />
+    <Content Include="Views\Avisos\Index.cshtml" />
+    <Content Include="Views\Home\_sectionAvisos.cshtml" />
+    <Content Include="Views\Ejercicios\Create.cshtml" />
+    <Content Include="Views\Ejercicios\Delete.cshtml" />
+    <Content Include="Views\Ejercicios\Details.cshtml" />
+    <Content Include="Views\Ejercicios\Edit.cshtml" />
+    <Content Include="Views\Ejercicios\Index.cshtml" />
+    <Content Include="Views\Rutinas\Create.cshtml" />
+    <Content Include="Views\Rutinas\Delete.cshtml" />
+    <Content Include="Views\Rutinas\Details.cshtml" />
+    <Content Include="Views\Rutinas\Edit.cshtml" />
+    <Content Include="Views\Rutinas\Index.cshtml" />
+    <Content Include="Views\Home\_sectionRutina.cshtml" />
+    <Content Include="Views\RendimientoEjercicios\Create.cshtml" />
+    <Content Include="Views\RendimientoEjercicios\Delete.cshtml" />
+    <Content Include="Views\RendimientoEjercicios\Details.cshtml" />
+    <Content Include="Views\RendimientoEjercicios\Edit.cshtml" />
+    <Content Include="Views\RendimientoEjercicios\Index.cshtml" />
+    <Content Include="Views\RendimientoEjercicios\_Index.cshtml" />
     <Content Include="Views\Balance\Index.cshtml" />
     <Content Include="Views\Balance\_balanceIngresos.cshtml" />
     <Content Include="Views\Balance\_balanceEgresos.cshtml" />

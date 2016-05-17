@@ -1,0 +1,48 @@
+﻿@model GymApp.Models.UserViewModels
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipoMembresia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipoMembresia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ffin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ffin)
+        </dd>
+        <h3>@ViewBag.restante Día(s) Restante</h3>
+
+        
+
+    </dl>
+</div>
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@
