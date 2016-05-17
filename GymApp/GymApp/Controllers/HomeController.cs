@@ -58,7 +58,11 @@ namespace GymApp.Controllers
             var ffin = usuario.ffin.ToShortDateString();
             var today = DateTime.Now.ToShortDateString();
             TimeSpan x = DateTime.Parse(ffin) - DateTime.Parse(today);
-            ViewBag.restante = x.Days;
+            if ((x.Days) < 0){
+                ViewBag.restante = "Membresía Vencida";
+            }else { 
+            ViewBag.restante = x.Days + "Día(s) Restante";
+            }
             return PartialView(usuario);
             
         }
