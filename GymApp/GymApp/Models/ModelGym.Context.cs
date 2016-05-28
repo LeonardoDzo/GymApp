@@ -38,7 +38,6 @@ namespace GymApp.Models
         public virtual DbSet<Ejercicio> Ejercicio { get; set; }
         public virtual DbSet<Rutina> Rutina { get; set; }
         public virtual DbSet<RendimientoEjercicio> RendimientoEjercicio { get; set; }
-
-   
+        public virtual DbSet<sender> sender { get; set; }
     }
 }

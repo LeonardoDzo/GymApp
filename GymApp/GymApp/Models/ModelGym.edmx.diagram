@@ -24,6 +24,7 @@
         <EntityTypeShape EntityType="dbGymModel.RendimientoEjercicio" Width="1.5" PointX="11.625" PointY="8.5" />
         <AssociationConnector Association="dbGymModel.FK_RendimientoEjercicio_AspNetUsers" />
         <AssociationConnector Association="dbGymModel.FK_RendimientoEjercicio_Ejercicio" />
+        <EntityTypeShape EntityType="dbGymModel.sender" Width="1.5" PointX="7.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

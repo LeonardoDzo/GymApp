@@ -261,6 +261,12 @@ namespace GymApp.Controllers
 
         }
 
+        //public async Task<ActionResult> enviarmasivo(string id)
+        //{
+        //    await UserManager.SendEmailAsync(id, "Restablecer contraseña", "HOLA ESTO ES UNA PRUEBA");
+        //    return null;
+        //}
+
         //
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]

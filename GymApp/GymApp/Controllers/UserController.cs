@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web.Mvc;
 
 namespace GymApp.Controllers
@@ -17,36 +18,71 @@ namespace GymApp.Controllers
         private dbGymEntities db = new dbGymEntities();
         private static List<UserViewModels> usuarios;
         // GET: User
-        public ActionResult Index(DateTime? StartDate, DateTime? EndDate, int vencimiento=0, bool Caducadas= false)
+        public async System.Threading.Tasks.Task<ActionResult> Index(DateTime? StartDate, DateTime? EndDate, int vencimiento = 0, bool Caducadas = false, bool Correo = false)
         {
             List<ICollection<AspNetUsers>> lista;
-            
+            List<string> listaemails;
             if (User.IsInRole("Administrador"))
                 lista = (from u in db.AspNetRoles where u.Name != "Administrador" select u.AspNetUsers).ToList();
             else
                 lista = (from u in db.AspNetRoles where u.Name == "Normal" select u.AspNetUsers).ToList();
 
             usuarios = obtenerUsuarios(lista);
-       
+
             var filtro = usuarios;
             double total = 0;
             int meses = 0;
             if (StartDate != null && EndDate != null)
             {
-                meses = Math.Abs((StartDate.Value.Month - EndDate.Value.Month) + 
+                meses = Math.Abs((StartDate.Value.Month - EndDate.Value.Month) +
                     12 * (StartDate.Value.Year - EndDate.Value.Year));
-                filtro = (from u in filtro where u.userRol == "Normal" && u.tipoMembresia != "Ninguna" 
-                          && u.fInicio >= StartDate && u.fInicio <= EndDate select u).ToList();
-            }
-                
-
-            if (vencimiento >0 )
-                filtro = (from u in filtro where u.userRol == "Normal" && u.tipoMembresia != "Ninguna" 
-                          && u.ffin >= DateTime.Now && u.ffin <= DateTime.Now.AddDays(vencimiento)
+                filtro = (from u in filtro
+                          where u.userRol == "Normal" && u.tipoMembresia != "Ninguna"
+         && u.fInicio >= StartDate && u.fInicio <= EndDate
                           select u).ToList();
-            if(Caducadas)
-                filtro = (from u in filtro where u.userRol == "Normal" && u.tipoMembresia != "Ninguna"
-                          && u.ffin <= DateTime.Now select u).ToList();
+
+
+                listaemails = (from u in filtro
+                          where u.userRol == "Normal" && u.tipoMembresia != "Ninguna"
+         && u.fInicio >= StartDate && u.fInicio <= EndDate
+                          select u.Email).ToList();
+                
+            }
+
+
+            if (vencimiento > 0)
+                filtro = (from u in filtro
+                          where u.userRol == "Normal" && u.tipoMembresia != "Ninguna"
+         && u.ffin >= DateTime.Now && u.ffin <= DateTime.Now.AddDays(vencimiento)
+                          select u).ToList();
+
+            listaemails = (from u in filtro
+                           where u.userRol == "Normal" && u.tipoMembresia != "Ninguna"
+          && u.fInicio >= StartDate && u.fInicio <= EndDate
+                           select u.Email).ToList();
+
+
+            if (Caducadas)
+                filtro = (from u in filtro
+                          where u.userRol == "Normal" && u.tipoMembresia != "Ninguna"
+         && u.ffin <= DateTime.Now
+                          select u).ToList();
+           
+
+            listaemails = (from u in filtro
+                           where u.userRol == "Normal" && u.tipoMembresia != "Ninguna"
+          && u.fInicio >= StartDate && u.fInicio <= EndDate
+                           select u.Email).ToList();
+
+            if (Correo)
+            {
+                    
+                mailConfig mC = new mailConfig();     
+                await mC.abrirconexion(listaemails);
+                Response.Write("<script text/javascript>alert('Correo(s) Enviado(s)')</script>");
+
+
+            }
 
             foreach (var i in filtro)
             {
@@ -55,9 +91,16 @@ namespace GymApp.Controllers
                 total += monto * meses;
             }
             ViewBag.SumaMembresias = total;
-            
+
             return View(filtro);
         }
+
+
+        //        mailConfig mc = new mailConfig();
+        //        AccountController aC = new AccountController();
+
+
+
         public List<UserViewModels> obtenerUsuarios(List<ICollection<AspNetUsers>> users)
         {
             int var1 = 1;

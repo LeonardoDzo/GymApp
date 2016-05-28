@@ -4,14 +4,84 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id ="infoUser" class="col-lg-6"></div>
+@*<div id ="infoUser" class="col-lg-6"></div>
 
 
-<div id="infoRutina" class="col-lg-6"></div>
+    <div id="infoRutina" class="col-lg-6"></div>
 
-<div id="infoAviso" class="col-lg-6"></div>
+    <div id="infoAviso" class="col-lg-6"></div>
 
-<div id="infoAviso" class="col-lg-6"></div>
+    <div id="infoRendimiento" class="col-lg-6"></div>
+
+    
+    <div id="infoAviso" class="col-lg-6"></div>*@
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-4 portfolio-item">
+            <div class="row">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">Avisos</div>
+                    <div id="infoAviso" class="panel-body"></div>
+                </div>
+
+
+                @*<h3><a href="#">Avisos</a> </h3>
+                <div id="infoAviso" class="col-lg-4"></div>*@
+            </div>
+            <div class="row">
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">Informacion Personal</div>
+                    <div id="infoUser" class="panel-body"></div>
+                </div>
+                
+                
+                  @*<h3><a href="#">Informacion Personal</a></h3>
+                <div id="infoUser" class="col-lg-4"></div>*@
+
+            </div>
+            </div>
+
+        <div class="col-md-7 portfolio-item">
+            <div class="col-md-6 portfolio-item">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Rutina</div>
+                    <div id="infoRutina" class="panel-body"></div>
+                </div>
+
+                
+                @*<h3><a href="#">Rutina</a> </h3>
+                <div id="infoRutina" class="col-lg-10"></div>*@
+
+            </div>
+
+            <div class="col-md-6 portfolio-item">
+
+                <div class="panel panel-danger">
+                    <div class="panel-heading">Rendimientos</div>
+                    <div id="infoRendimiento" class="panel-body"></div>
+                </div>
+                
+                 @*<h3> <a href="#">Rendimientos</a></h3>
+                <div id="infoRendimiento" class="col-lg-8"></div>*@
+            </div>
+
+
+
+
+        </div>
+
+       
+
+    </div>
+
+
+ 
+</div>
+
+    
 
 
 @section Scripts {
@@ -26,6 +96,10 @@
 
             $('#infoRutina').empty();
             $('#infoRutina').load("/Home/_sectionRutina");
+       
+
+            $('#infoRendimiento').empty();
+            $('#infoRendimiento').load("/Home/_sectionRendimientos");
 
             $('#infoAviso').empty();
             $('#infoAviso').load("/Home/_sectionAvisos");

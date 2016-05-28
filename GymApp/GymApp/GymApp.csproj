@@ -191,6 +191,7 @@
     <Compile Include="Controllers\RegistroController.cs" />
     <Compile Include="Controllers\RendimientoEjerciciosController.cs" />
     <Compile Include="Controllers\RutinasController.cs" />
+    <Compile Include="Controllers\sendersController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -268,6 +269,9 @@
     <Compile Include="Models\Rutina.cs">
       <DependentUpon>ModelGym.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sender.cs">
+      <DependentUpon>ModelGym.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserMembresias.cs">
       <DependentUpon>ModelGym.tt</DependentUpon>
     </Compile>
@@ -276,6 +280,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\4-col-portfolio.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\estiloReloj.css" />
@@ -319,7 +324,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -415,6 +422,9 @@
     <Content Include="Views\Balance\_balanceIngresos.cshtml" />
     <Content Include="Views\Balance\_balanceEgresos.cshtml" />
     <Content Include="Views\User\Membresia.cshtml" />
+    <Content Include="Views\senders\Edit.cshtml" />
+    <Content Include="Views\senders\Index.cshtml" />
+    <Content Include="Views\Home\_sectionRendimientos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

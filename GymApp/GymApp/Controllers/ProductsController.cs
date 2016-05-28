@@ -79,17 +79,27 @@ namespace GymApp.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id,Name,Price,Quantity,Description")] Products products, int Agregar)
+        public async Task<ActionResult> Edit([Bind(Include = "id,Name,Price,Quantity,Description")] Products products, int Agregar=0)
         {
-            if (ModelState.IsValid && Agregar>=0)
+            try
             {
-                var pro = products;
-                pro.Quantity += Agregar;
-                db.Entry(pro).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                Convert.ToInt32(Agregar);
+                if (ModelState.IsValid && Agregar >= 0)
+                {
+                    var pro = products;
+                    pro.Quantity += Agregar;
+                    db.Entry(pro).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+                return View(products);
             }
-            return View(products);
+            catch (Exception)
+            {
+                return View();
+                
+            }
+           
         }
 
         // GET: Products/Delete/5
