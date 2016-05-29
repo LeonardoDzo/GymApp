@@ -7,12 +7,13 @@
         <li>@Html.ActionLink("Productos", "Index", "Products")</li>
         <li>@Html.ActionLink("Ingresos", "Index", "Ingresos")</li>
         <li>@Html.ActionLink("Egresos", "Index", "Egresos")</li>
+        <li>@Html.ActionLink("Ejercicios", "Index", "Ejercicios")</li>
     </ul>
 }
 @if (User.IsInRole("Empleado"))
 {
     <ul class="nav navbar-nav navbar-left">
-        <li>@Html.ActionLink("Usuarios", "Index", "User")</li>
+        <li>@Html.ActionLink("Records", "Index", "RendimientoEjercicios")</li>
     </ul>
 }
 @if (Request.IsAuthenticated)

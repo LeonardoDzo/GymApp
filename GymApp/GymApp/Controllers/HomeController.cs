@@ -36,11 +36,12 @@ namespace GymApp.Controllers
 
         private dbGymEntities db = new dbGymEntities();
         private static List<UserViewModels> usuarios;
+        [Authorize(Roles ="Normal")]
         public ActionResult IndexUser()
         {
             return View();
         }
-
+        [Authorize(Roles = "Normal")]
         public ActionResult _sectionUser()
         {
             UserController uC = new UserController();
@@ -58,22 +59,34 @@ namespace GymApp.Controllers
             var ffin = usuario.ffin.ToShortDateString();
             var today = DateTime.Now.ToShortDateString();
             TimeSpan x = DateTime.Parse(ffin) - DateTime.Parse(today);
-            ViewBag.restante = x.Days;
+            var diarestante = x.Days;
+
+            if ((diarestante) < 0){
+                ViewBag.restante = "Membresía Vencida";
+                Response.Write("<script text/javascript>alert('Membresía Vencida')</script>");
+
+            }
+            else {
+                if (diarestante <= 7)
+                {
+                 
+
+                    Response.Write("<script text/javascript>alert('Te quedan "+ diarestante+" dias restantes ')</script>");
+                }
+                ViewBag.restante = diarestante + "Día(s) Restante";
+            }
             return PartialView(usuario);
             
         }
-        // private static List<Rutina> rutinadiaria;
+        
         [Authorize(Roles = "Normal")]
         public ActionResult _sectionRutina()
         {
-            //var currenttime = DbFunctions.TruncateTime(DateTime.Now.Date);
             var currentime = DateTime.Now.Date;
             Rutina rutinadiaria = (from u in db.Rutina
                                    where (DbFunctions.TruncateTime(u.fini) == currentime)
                                    select u).FirstOrDefault();
-            //   Rutina rutinadiaria = (from u in db.Rutina where u.fini.Value.ToShortDateString()== DateTime.Today.ToShortDateString() select u).FirstOrDefault();
-            //db.Rutina.Where(x => DbFunctions.TruncateTime(x.fini) == DateTime.Now)
-            //   var lista = db.EjercicioRutina.Where(x => x.Fecha.Date == DateTime.Now.Date);
+       
             return PartialView(rutinadiaria);
 
         }
@@ -82,11 +95,25 @@ namespace GymApp.Controllers
         [Authorize(Roles = "Normal")]
         public ActionResult _sectionAvisos()
         {
-          //  avisos = (from u in db.Aviso select u).ToList();
-
-            //avisos = (from u in db.Aviso where u.ffin >= DateTime.Now select u).ToList();
 
             return PartialView(db.Aviso.Where(x=> x.ffin >= DateTime.Now));
+
+        }
+
+
+        [Authorize(Roles = "Normal")]
+        public ActionResult _sectionRendimientos()
+        {
+
+            var result = db.RendimientoEjercicio.Where(u => u.AspNetUsers.UserName == User.Identity.Name)
+                .GroupBy(x => x.ejercicioID, (key, g) =>
+                g.OrderByDescending(e => e.Id)
+                .FirstOrDefault());
+            // esta linea muestra todos los ejercicios por usuario
+            // var rendimientoEjercicio = (from u in db.RendimientoEjercicio where u.AspNetUsers.UserName == User.Identity.Name select u); 
+            ViewBag.ejercicioID = new SelectList(db.Ejercicio, "Id", "Nombre");
+
+            return PartialView(result.ToList());
 
         }
 

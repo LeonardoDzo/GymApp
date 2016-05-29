@@ -129,6 +129,14 @@
           <Property Name="Rutinas" Type="nvarchar(max)" Nullable="false" />
           <Property Name="fini" Type="datetime" />
         </EntityType>
+        <EntityType Name="sender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="sentaccount" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="pass" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="UserMembresias">
           <Key>
             <PropertyRef Name="Id" />
@@ -230,6 +238,7 @@
           <EntitySet Name="Registro" EntityType="Self.Registro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RendimientoEjercicio" EntityType="Self.RendimientoEjercicio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rutina" EntityType="Self.Rutina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sender" EntityType="Self.sender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserMembresias" EntityType="Self.UserMembresias" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -434,6 +443,7 @@
             <End Role="Ejercicio" EntitySet="Ejercicio" />
             <End Role="RendimientoEjercicio" EntitySet="RendimientoEjercicio" />
           </AssociationSet>
+          <EntitySet Name="sender" EntityType="dbGymModel.sender" />
           </EntityContainer>
         <EntityType Name="Categoria">
           <Key>
@@ -502,6 +512,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="sender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="sentaccount" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pass" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -652,6 +670,15 @@
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="ejercicioID" ColumnName="ejercicioID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sender">
+            <EntityTypeMapping TypeName="dbGymModel.sender">
+              <MappingFragment StoreEntitySet="sender">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="sentaccount" ColumnName="sentaccount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

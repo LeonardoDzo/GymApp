@@ -1,27 +1,22 @@
 ﻿@model GymApp.Models.Rutina
 
-<div>
-    <h4>Rutina</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Rutinas)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Rutinas)
-        </dd>
-
+    @*<h4>Rutina</h4>
+    <hr />*@
         @*<dt>
-            @Html.DisplayNameFor(model => model.fini)
-        </dt>
+            @Html.DisplayNameFor(model => model.Rutinas)
+        </dt>*@
 
-        <dd>
-            @Html.DisplayFor(model => model.fini)
-        </dd>*@
+            @Html.DisplayFor(model => model.Rutinas)
+            @*<dt>
+                @Html.DisplayNameFor(model => model.fini)
+            </dt>
 
-    </dl>
-</div>
+            <dd>
+                @Html.DisplayFor(model => model.fini)
+            </dd>*@
+
+
 @*<p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
