@@ -41,8 +41,13 @@
 
 
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+
+            <a href="@Url.Action("Delete", "RendimientoEjercicios",new { id=item.Id })" class="btn">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </a>
+
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>

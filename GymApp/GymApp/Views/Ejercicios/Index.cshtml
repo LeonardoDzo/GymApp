@@ -23,9 +23,21 @@
             @Html.DisplayFor(modelItem => item.Nombre)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            <a href="@Url.Action("Edit", "Ejercicios",new { id=item.Id })" class="btn">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            </a>
+
+            <a href="@Url.Action("Details", "Ejercicios",new { id=item.Id })" class="btn">
+                <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+            </a>
+
+            <a href="@Url.Action("Delete", "Ejercicios",new { id=item.Id })" class="btn">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </a>
+
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
         </td>
     </tr>
 }

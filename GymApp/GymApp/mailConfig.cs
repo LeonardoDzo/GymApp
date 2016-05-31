@@ -12,6 +12,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using GymApp.Models;
+using System.IO;
 
 namespace GymApp
 {
@@ -50,7 +51,7 @@ namespace GymApp
             await client.SendMailAsync(mail);
         }
 
-        public async Task abrirconexion(List<string> emails)
+        public async Task abrirconexion(List<string> emails, bool caducadas)
         {
             var credentialUserName = (from u in db.sender select u.sentaccount).FirstOrDefault();
             var sentFrom = (from u in db.sender select u.sentaccount).FirstOrDefault();
@@ -76,19 +77,62 @@ namespace GymApp
             foreach (var i in emails)
             {
                 //var destination 
-
+                
                 // Create the message:
                 var mail = new System.Net.Mail.MailMessage(sentFrom, i);
                 mail.IsBodyHtml = true;
 
-                mail.Subject = "MASIVO";
+                if (caducadas == true)
+                {
+                    mail.Subject = "Kinetic Cross Training ¡Te estamos esperando!";
 
-                mail.Body = "QUE VAS A PONER";
+                }
+                else
+                {
+                    mail.Subject = "Kinetic Cross Training ¡No te quedes fuera!";
+
+                }
+
+                mail.Body = createEmailBody(caducadas);
 
                 await client.SendMailAsync(mail);
 
             }
  
+
+        }
+
+        private string createEmailBody(bool caducadas)
+
+        {
+
+            string body = string.Empty;
+            //using streamreader for reading my htmltemplate   
+            if (caducadas == true)
+            {
+                using (StreamReader reader = new StreamReader("RecordatorioTemplate/indexCaducada.html"))
+
+                {
+
+                    body = reader.ReadToEnd();
+
+                }
+
+            }
+            else
+            {
+                using (StreamReader reader = new StreamReader("RecordatorioTemplate/index.html"))
+
+                {
+
+                    body = reader.ReadToEnd();
+
+                }
+
+
+            }
+
+            return body;
 
         }
 

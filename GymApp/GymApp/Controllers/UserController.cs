@@ -51,34 +51,37 @@ namespace GymApp.Controllers
 
 
             if (vencimiento > 0)
+            
                 filtro = (from u in filtro
                           where u.userRol == "Normal" && u.tipoMembresia != "Ninguna"
          && u.ffin >= DateTime.Now && u.ffin <= DateTime.Now.AddDays(vencimiento)
                           select u).ToList();
 
-            listaemails = (from u in filtro
-                           where u.userRol == "Normal" && u.tipoMembresia != "Ninguna"
-          && u.fInicio >= StartDate && u.fInicio <= EndDate
-                           select u.Email).ToList();
+                listaemails = (from u in filtro
+                               where u.userRol == "Normal" && u.tipoMembresia != "Ninguna"
+             && u.ffin >= DateTime.Now && u.ffin <= DateTime.Now.AddDays(vencimiento)
+                               select u.Email).ToList();
 
-
+            
             if (Caducadas)
+            
                 filtro = (from u in filtro
                           where u.userRol == "Normal" && u.tipoMembresia != "Ninguna"
          && u.ffin <= DateTime.Now
                           select u).ToList();
-           
 
-            listaemails = (from u in filtro
-                           where u.userRol == "Normal" && u.tipoMembresia != "Ninguna"
-          && u.fInicio >= StartDate && u.fInicio <= EndDate
-                           select u.Email).ToList();
+
+                listaemails = (from u in filtro
+                               where u.userRol == "Normal" && u.tipoMembresia != "Ninguna"
+             && u.ffin <= DateTime.Now && u.Email != null
+                               select u.Email).ToList();
+            
 
             if (Correo)
             {
                     
-                mailConfig mC = new mailConfig();     
-                await mC.abrirconexion(listaemails);
+                mailConfig mC = new mailConfig();
+                await mC.abrirconexion(listaemails, Caducadas);
                 Response.Write("<script text/javascript>alert('Correo(s) Enviado(s)')</script>");
 
 
