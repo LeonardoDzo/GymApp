@@ -1,13 +1,14 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-         
-  background: url(http://static.wixstatic.com/media/26267f_067168e8ecc58250fbc51a77f768e496.jpg_1024) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
+        background: white;
+        background-color: white;
+        background-image: none;
+        background-repeat: repeat;
+        background-attachment: scroll;
+        background-position: 0% 0%;
+        background-clip: border-box;
+        background-origin: padding-box;
+        background-size: auto auto;
+        color:black;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -17,6 +18,9 @@
   
 }
 
+nav{
+    background-color:black;
+}
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */

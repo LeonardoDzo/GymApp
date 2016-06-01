@@ -5,56 +5,82 @@
 }
 
 <h2>Usuarios</h2>
-@using (Html.BeginForm("Index", "User", FormMethod.Get))
+@using (Html.BeginForm("Index", "User", FormMethod.Get, new { @class = "form-inline" }))
 {
-
-    @Html.TextBox("StartDate", "", new { @class = "datepicker form-control" })
-    @Html.TextBox("EndDate", "", new { @class = "datepicker form-control" })
-    @Html.TextBox("vencimiento", "", new {@type="number", @class = "numeric form-control" })
-    @Html.CheckBox("Caducadas")
-    @Html.CheckBox("Correo")
-    <input type="submit" value="Buscar" class="form-control" />
+    <div class="form-group">
+        <div class="col-md-15">
+            <label>Fecha Inicio: </label>
+            <input class="datepicker form-control" name="StartDate" placeholder="Fecha de Inicio"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-15">
+            <label>Fecha Fin: </label>
+            <input class="datepicker form-control" name="EndDAte" placeholder="Fecha Fin" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-15">
+            <label>Días para vencer: </label>
+            <input class="form-control" name="vencimiento" placeholder="Días para vencer" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-15">
+            <label>Caducadas: </label>
+            @Html.CheckBox("Caducadas")<br />
+            <label>Correo: </label>
+            @Html.CheckBox("correo")
+        </div>
+    </div>
+  
+    <div class="form-group">
+        <div class="col-md-15">
+            <input type="submit" value="Buscar" class="form-control" />
+        </div>
+    </div>
+    
 }
 <p>
     @Html.ActionLink("Registrar nuevo usuario", "Register", "Account")
 </p>
-<div class="table-responsive">
-    <table class="table table-bordered table-hover table-condensed table-striped">
+<div class="container table-responsive">
+    <table class="table-fill">
         <tr>
-            <th>
+            <th data-th>
                 @Html.DisplayNameFor(model => model.accessControl)
             </th>
-            <th>
+            <th  data-th>
                 @Html.DisplayNameFor(model => model.UserName)
             </th>
-            <th>
+            <th  data-th>
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
-            <th>
+            <th  data-th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
-            <th>
+            <th  data-th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th>
+            <th  data-th>
                 @Html.DisplayNameFor(model => model.PhoneNumber)
             </th>
-            <th>
+            <th  data-th>
                 @Html.DisplayNameFor(model => model.FechaNacimiento)
             </th>
-            <th>
+            <th  data-th>
                 @Html.DisplayNameFor(model => model.tipoMembresia)
-            </th>
-            <th>
+            </th >
+            <th  data-th>
                 @Html.DisplayNameFor(model => model.fInicio)
             </th>
-            <th>
+            <th  data-th>
                 @Html.DisplayNameFor(model => model.ffin)
             </th>
-            <th>
+            <th  data-th>
                 @Html.DisplayNameFor(model => model.userRol)
             </th>
-            <th></th>
+            <th  data-th></th>
         </tr>
 
         @foreach (var item in Model)
@@ -62,9 +88,9 @@
             if (item.ffin >= DateTime.Now)
             {
                 <tr class="success">
-                    <th>
+                    <td>
                         @Html.DisplayFor(model => item.accessControl)
-                    </th>
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.UserName)
                     </td>
@@ -124,9 +150,9 @@
 else
             {
                 <tr class="danger">
-                    <th>
+                    <td>
                         @Html.DisplayFor(model => item.accessControl)
-                    </th>
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.UserName)
                     </td>

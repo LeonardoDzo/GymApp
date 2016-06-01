@@ -2,31 +2,38 @@
 @{
     ViewBag.Title = "Balance";
 }
-
-<div class="form-group form-inline">
-    <br />
-    <div class="col col-lg-10">
-        <input class="datepicker form-control" id="StartDate"/>
-        <input class="datepicker form-control" id="EndDate" />
-        <input type="submit" id="Enviar" class="btn btn-success"/>
-        <button id="generar" class="btn btn-info">Generar</button>
-    </div>
-</div>
-<hr />
-<div class="container" id="PDF">
-    <div class="row">
-        <div id="fechas"></div>
-    </div>
-    <br />
-    <div class="row">
-        <div id="Ingresos" class="col-lg-10">
+<br />
+<br />
+<div class="active">
+    <div class="form-group form-inline">
+        <br />
+        <div class="col col-lg-10">
+            <input class="datepicker form-control" id="StartDate" />
+            <input class="datepicker form-control" id="EndDate" />
+            <input type="submit" id="Enviar" class="btn btn-success" />
+            <button id="generar" class="btn btn-info">Generar</button>
         </div>
-        <div id="Egresos" class="col-lg-10">
-        </div>
-
     </div>
+    <hr />
+    <div class="container" id="PDF">
+        <div class="row">
+            <div id="" class="col-lg-3">
+                <img alt="Brand" height="100" width="80" src="~/fonts/logo.jpg">
+            </div>
+            <div id="fechas" class="col-lg-7"></div>
+        </div>
+        <br />
+        <div class="row">
+            <div id="Ingresos" class="col-lg-10">
+            </div>
+            <div id="Egresos" class="col-lg-10">
+            </div>
+
+        </div>
+    </div>
+    <div id="editor"></div>
 </div>
-<div id="editor"></div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

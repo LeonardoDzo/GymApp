@@ -286,7 +286,9 @@
     <Content Include="Content\estiloReloj.css" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery-ui.theme.css" />
+    <Content Include="Content\tabla.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fondo.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\logo.jpg" />
     <Content Include="Global.asax" />
@@ -324,7 +326,10 @@
     <Content Include="Scripts\MyScript.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\sweetalert-dev.js" />
+    <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Styles\sweetalert.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

@@ -8,12 +8,14 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/jquery-ui.css")
     @Styles.Render("~/Content/estiloReloj.css")
+    @Styles.Render("~/Content/tabla.css")
+    @Styles.Render("~/Styles/sweetalert.css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     @*<body background="http://static.wixstatic.com/media/26267f_067168e8ecc58250fbc51a77f768e496.jpg_1024">*@
 
-        <div class="navbar nav-tabs navbar-inverse navbar-fixed-top">
+        <div class="navbar nav-tabs navbar-inverse navbar-fixed-top " style="background-color:black;">
             <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="~/Home/Index">
@@ -50,6 +52,7 @@
         @Scripts.Render("~/Scripts/jquery-1.10.2.js")
         @Scripts.Render("~/Scripts/jquery-ui.js")
         @Scripts.Render("~/Scripts/MyScript.js")
+        @Scripts.Render("~/Scripts/sweetalert.min.js")
         @RenderSection("scripts", required: false)
     </body>
 </html>

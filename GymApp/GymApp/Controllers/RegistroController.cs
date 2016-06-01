@@ -46,8 +46,10 @@ namespace GymApp.Controllers
         }
 
         // GET: Registro/Create
-        public ActionResult Create()
+        public ActionResult Create(string error = "", string persona= "")
         {
+            ViewBag.persona = persona;
+            ViewBag.error = error;
             return View();
         }
 
@@ -66,16 +68,17 @@ namespace GymApp.Controllers
                 register.date = System.DateTime.Now;
                 register.idUser = (from u in db.AspNetUsers where u.accessControl == accessControUser select u.Id).FirstOrDefault();
                 register.accessControUser = accessControUser;
-                if(register.idUser!= null)
+                var user = (from u in db.AspNetUsers where u.accessControl == accessControUser select u).FirstOrDefault();
+                if (register.idUser!= null)
                 {
                     db.Registro.Add(register);
                     db.SaveChanges();
                 }
-                
-                return RedirectToAction("Create");
+               
+                return RedirectToAction("Create", new { error= "registrado", persona = user.FirstName +" " +user.LastName});
             }else
             {
-                Response.Write(@"<script language = 'javascript'>alert('Numero de Control de accesso Incorrecto') </script>");
+                return RedirectToAction("Create", new { error = "error" });
             }
 
             
