@@ -1,5 +1,6 @@
 ﻿@model GymApp.Models.Rutina
 
+<LINK href="~/Content/Chalkboard.css" rel="stylesheet" type="text/css">
 
     @*<h4>Rutina</h4>
     <hr />*@
@@ -7,8 +8,9 @@
             @Html.DisplayNameFor(model => model.Rutinas)
         </dt>*@
 
-            @Html.DisplayFor(model => model.Rutinas)
-            @*<dt>
+<labelC>
+    @Html.DisplayFor(model => model.Rutinas)
+</labelC>            @*<dt>
                 @Html.DisplayNameFor(model => model.fini)
             </dt>
 
