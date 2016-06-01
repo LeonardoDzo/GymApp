@@ -13,14 +13,24 @@
 
     <div id="infoRendimiento" class="col-lg-6"></div>
 
-    
-    <div id="infoAviso" class="col-lg-6"></div>*@
 
+    <div id="infoAviso" class="col-lg-6"></div>*@
+<LINK href="~/Content/Chalkboard.css" rel="stylesheet" type="text/css">
 <div class="container">
 
+    @*<div class="row">*@
+
     <div class="row">
+        <div class="row"></div>
+        </br>
+
         <div class="col-md-4 portfolio-item">
+
             <div class="row">
+                <div class="row"></div>
+                </br>
+                </br>
+
                 <div class="panel panel-danger">
                     <div class="panel-heading">Avisos</div>
                     <div id="infoAviso" class="panel-body"></div>
@@ -28,44 +38,52 @@
 
 
                 @*<h3><a href="#">Avisos</a> </h3>
-                <div id="infoAviso" class="col-lg-4"></div>*@
+                    <div id="infoAviso" class="col-lg-4"></div>*@
             </div>
+
             <div class="row">
 
                 <div class="panel panel-success">
                     <div class="panel-heading">Informacion Personal</div>
                     <div id="infoUser" class="panel-body"></div>
                 </div>
-                
-                
-                  @*<h3><a href="#">Informacion Personal</a></h3>
-                <div id="infoUser" class="col-lg-4"></div>*@
+
+
+                @*<h3><a href="#">Informacion Personal</a></h3>
+                    <div id="infoUser" class="col-lg-4"></div>*@
 
             </div>
-            </div>
+        </div>
+        <div class="col-md-1 portfolio-item"></div>
 
         <div class="col-md-7 portfolio-item">
-            <div class="col-md-6 portfolio-item">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Rutina</div>
-                    <div id="infoRutina" class="panel-body"></div>
-                </div>
+            <div class="row">
 
-                
-                @*<h3><a href="#">Rutina</a> </h3>
-                <div id="infoRutina" class="col-lg-10"></div>*@
+                @*<div class="panel panel-primary">*@
+                @*<div class="panel-heading">Rutina</div>*@
+                @*<div id="infoRutina" class="panel-body"></div>*@
+                @*</div>*@
+                <div class="blackboard">
+                    <div class="form" id="infoRutina"></div>
+                </div>
 
             </div>
 
-            <div class="col-md-6 portfolio-item">
+            @*<h3><a href="#">Rutina</a> </h3>
+                <div id="infoRutina" class="col-lg-10"></div>*@
 
-                <div class="panel panel-danger">
-                    <div class="panel-heading">Rendimientos</div>
-                    <div id="infoRendimiento" class="panel-body"></div>
+            <div class="row">
+
+                <div class="col-md-7 portfolio-item">
+
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">Rendimientos</div>
+                        <div id="infoRendimiento" class="panel-body"></div>
+                    </div>
+
+                    @*<h3> <a href="#">Rendimientos</a></h3>
+                        <div id="infoRendimiento" class="col-lg-8"></div>*@
                 </div>
-                
-                 @*<h3> <a href="#">Rendimientos</a></h3>
-                <div id="infoRendimiento" class="col-lg-8"></div>*@
             </div>
 
 
@@ -73,40 +91,163 @@
 
         </div>
 
-       
+
+
+        @*</div>*@
+
+
 
     </div>
 
 
- 
-</div>
-
-    
 
 
-@section Scripts {
+    @section Scripts {
 
-@Scripts.Render("~/bundles/jqueryval")
-@Scripts.Render("~/Scripts/jquery-1.10.2.js")
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/Scripts/jquery-1.10.2.js")
 
-<script type="text/javascript">
-        $(document).ready(function () {
-            $('#infoUser').empty();
-            $('#infoUser').load("/Home/_sectionUser");
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#infoUser').empty();
+                $('#infoUser').load("/Home/_sectionUser");
 
-            $('#infoRutina').empty();
-            $('#infoRutina').load("/Home/_sectionRutina");
-       
+                $('#infoRutina').empty();
+                $('#infoRutina').load("/Home/_sectionRutina");
 
-            $('#infoRendimiento').empty();
-            $('#infoRendimiento').load("/Home/_sectionRendimientos");
 
-            $('#infoAviso').empty();
-            $('#infoAviso').load("/Home/_sectionAvisos");
-        });
+                $('#infoRendimiento').empty();
+                $('#infoRendimiento').load("/Home/_sectionRendimientos");
 
-</script>
+                $('#infoAviso').empty();
+                $('#infoAviso').load("/Home/_sectionAvisos");
+            });
+
+        </script>
 
 
 
-}
+    }
+
+
+    @*@model GymApp.Models.UserViewModels
+
+        @{
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+
+        @*<div id ="infoUser" class="col-lg-6"></div>
+
+
+            <div id="infoRutina" class="col-lg-6"></div>
+
+            <div id="infoAviso" class="col-lg-6"></div>
+
+            <div id="infoRendimiento" class="col-lg-6"></div>
+
+
+            <div id="infoAviso" class="col-lg-6"></div>*@
+    @*<LINK href="~/Content/Chalkboard.css" rel="stylesheet" type="text/css">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-4 portfolio-item">
+                    <div class="row">
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">Avisos</div>
+                            <div id="infoAviso" class="panel-body"></div>
+                        </div>*@
+
+
+    @*<h3><a href="#">Avisos</a> </h3>
+        <div id="infoAviso" class="col-lg-4"></div>*@
+    @*</div>
+        <div class="row">
+
+            <div class="panel panel-success">
+                <div class="panel-heading">Informacion Personal</div>
+                <div id="infoUser" class="panel-body"></div>
+            </div>*@
+
+
+    @*<h3><a href="#">Informacion Personal</a></h3>
+        <div id="infoUser" class="col-lg-4"></div>*@
+
+    @*</div>
+        </div>
+
+        <div class="col-md-7 portfolio-item">
+            <div class="col-md-6 portfolio-item">*@
+    @*<div class="panel panel-primary">
+            <div class="panel-heading">Rutina</div>
+            <div id="infoRutina" class="panel-body"></div>
+        </div>*@
+    @*<div class="blackboard">
+            <div class="form" id="infoRutina">
+                <p>
+                    <label> </label>
+                    <input type="text" />
+                </p>
+
+            </div>
+        </div>*@
+
+
+    @*<h3><a href="#">Rutina</a> </h3>
+        <div id="infoRutina" class="col-lg-10"></div>*@
+
+    @*</div>
+
+        <div class="col-md-6 portfolio-item">
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">Rendimientos</div>
+                <div id="infoRendimiento" class="panel-body"></div>
+            </div>*@
+
+    @*<h3> <a href="#">Rendimientos</a></h3>
+        <div id="infoRendimiento" class="col-lg-8"></div>*@
+    @*</div>
+
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>*@
+
+
+
+
+    @*@section Scripts {
+
+            @Scripts.Render("~/bundles/jqueryval")
+            @Scripts.Render("~/Scripts/jquery-1.10.2.js")
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#infoUser').empty();
+                    $('#infoUser').load("/Home/_sectionUser");
+
+                    $('#infoRutina').empty();
+                    $('#infoRutina').load("/Home/_sectionRutina");
+
+
+                    $('#infoRendimiento').empty();
+                    $('#infoRendimiento').load("/Home/_sectionRendimientos");
+
+                    $('#infoAviso').empty();
+                    $('#infoAviso').load("/Home/_sectionAvisos");
+                });
+
+            </script>
+
+
+
+        }*@
