@@ -21,10 +21,10 @@
             </a>
 
             <!-- the username -->
-            <h1>David Jones</h1>
+            <h1> @ViewBag.usuario </h1>
 
             <!-- and role or location -->
-            <h2>Team Kineticr</h2>
+            <h2>Team Kinetic</h2>
 
         </header>
 
@@ -33,7 +33,7 @@
             @if (Model.HasPassword)
             {
                 <a href="@Url.Action("ChangePassword", "Manage")" class="btn">
-                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>Cambiar la contraseña
+                   Cambiar la contraseña
                 </a>        }
             else
             {

@@ -54,6 +54,12 @@ namespace GymApp.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
+
+            dbGymEntities db = new dbGymEntities();
+
+            var user = db.AspNetUsers.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
+            ViewBag.usuario = user.FirstName + " " + user.LastName;
+
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Su contraseña se ha cambiado."
                 : message == ManageMessageId.SetPasswordSuccess ? "Su contraseña se ha establecido."
@@ -215,6 +221,7 @@ namespace GymApp.Controllers
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
         {
+         
             return View();
         }
 
