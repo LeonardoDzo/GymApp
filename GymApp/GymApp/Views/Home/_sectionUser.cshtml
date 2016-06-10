@@ -1,5 +1,5 @@
 ﻿@model GymApp.Models.UserViewModels
-
+<input id="error" value=@ViewBag.error type="hidden" />
 <div>
 
     <hr />
@@ -47,3 +47,15 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>*@
+<script>
+    $(document).ready(function () {
+
+        if ($("#error").val() == "error") {
+            swal("Vencida!", "Tu membresia a vencido, favor de realizar el pago ", "error");    
+        }
+        if ($("#error").val() == "dias") {
+            swal("Cuidado!", "Tu membresia esta por vencer", "warning");
+        }
+
+    });
+</script>

@@ -8,8 +8,9 @@
 @using (Html.BeginForm("Index", "Registro", FormMethod.Get))
 {
 
-    
+    <h4>Nombre:</h4>
     @Html.TextBox("Nombre", "", new { @class = "form-control", @type = "text" })
+    <h4>Apellidos:</h4>
     @Html.TextBox("Apellidos", "", new { @class = "form-control", @type = "text" })
     <input type="submit" value="Buscar" class="form-control" />
 }

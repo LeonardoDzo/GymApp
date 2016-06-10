@@ -42,7 +42,7 @@ namespace GymApp.Controllers
             {
                 return HttpNotFound();
             }
-            return View(registro);
+            return PartialView(registro);
         }
 
         // GET: Registro/Create
@@ -81,8 +81,6 @@ namespace GymApp.Controllers
                 return RedirectToAction("Create", new { error = "error" });
             }
 
-            
-            return View();
         }
 
        
