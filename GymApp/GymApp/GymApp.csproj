@@ -287,6 +287,7 @@
     <Content Include="Content\estiloReloj.css" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery-ui.theme.css" />
+    <Content Include="Content\reloj.css" />
     <Content Include="Content\tabla.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fondo.jpg" />

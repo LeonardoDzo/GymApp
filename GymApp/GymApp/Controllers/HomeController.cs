@@ -62,16 +62,12 @@ namespace GymApp.Controllers
             var diarestante = x.Days;
 
             if ((diarestante) < 0){
-                ViewBag.restante = "Membresía Vencida";
-                Response.Write("<script text/javascript>alert('Membresía Vencida')</script>");
-
+                ViewBag.error = "error";
             }
             else {
                 if (diarestante <= 7)
                 {
-                 
-
-                    Response.Write("<script text/javascript>alert('Te quedan "+ diarestante+" dias restantes ')</script>");
+                    ViewBag.error = "dias";
                 }
                 ViewBag.restante = diarestante + "Día(s) Restante";
             }
