@@ -1,7 +1,7 @@
 ﻿@model GymApp.Models.UserViewModels
 @if (Model.ffin < DateTime.Now)
 {
-    <div style="background-color:red">
+    <div >
         <hr />
         <dl class="dl-horizontal">
             <dt>
@@ -25,13 +25,17 @@
             <dt>
                 @Html.DisplayNameFor(model => model.ffin)
             </dt>
-            <dd>
-                @Html.DisplayFor(model => model.ffin)
-            </dd>
-            <h3>@ViewBag.restante</h3>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ffin)
+                </dd>
+            <div style="background-color:red">
+
+                <h3>@ViewBag.restante</h3>
+            </div>
 
 
-        </dl>
+</dl>
     </div>
 }
 else
