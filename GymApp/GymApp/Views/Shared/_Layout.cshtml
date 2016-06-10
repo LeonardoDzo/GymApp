@@ -1,55 +1,58 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - GymApp</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/jquery-ui.css")
     @Styles.Render("~/Content/estiloReloj.css")
+    @Styles.Render("~/Content/tabla.css")
+    @Styles.Render("~/Styles/sweetalert.css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     @*<body background="http://static.wixstatic.com/media/26267f_067168e8ecc58250fbc51a77f768e496.jpg_1024">*@
 
-        <div class="navbar nav-tabs navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="~/Home/Index">
-                        <img alt="Brand" height="42" width="42" src="~/fonts/logo.jpg">
-                    </a>
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
+    <div class="navbar nav-tabs navbar-inverse navbar-fixed-top " style="background-color:black;">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="~/Home/Index">
+                    <img alt="Brand" height="42" width="42" src="~/fonts/logo.jpg">
+                </a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
 
-                    </button>
-                </div>
-                <div class="navbar-collapse collapse">
-                    @*<ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                        </ul>*@
-                    @Html.Partial("_LoginPartial")
-                </div>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                @*<ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                    </ul>*@
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
-        <div class="container body-content">
-            <br />
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - Kinetic Cross Training</p>
-            </footer>
-
-        </div>
+    </div>
+    <div class="container body-content">
+        <br />
+        @RenderBody()
+        <hr />
 
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/Scripts/jquery-1.10.2.js")
-        @Scripts.Render("~/Scripts/jquery-ui.js")
-        @Scripts.Render("~/Scripts/MyScript.js")
-        @RenderSection("scripts", required: false)
-    </body>
+    </div>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Kinetic Cross Training</p>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/jquery-1.10.2.js")
+    @Scripts.Render("~/Scripts/jquery-ui.js")
+    @Scripts.Render("~/Scripts/MyScript.js")
+    @Scripts.Render("~/Scripts/sweetalert.min.js")
+    @RenderSection("scripts", required: false)
+</body>
 </html>

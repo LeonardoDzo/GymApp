@@ -2,42 +2,43 @@
 
 
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.fecha)
-        </th>
+    @*<tr>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha)
+            </th>
 
-        <th>
-            @Html.DisplayNameFor(model => model.Ejercicio.Nombre)
-        </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ejercicio.Nombre)
+            </th>
 
-        <th>
-            @Html.DisplayNameFor(model => model.PR)
-        </th>
-
-
-
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha)
-        </td>
-
-        <td>
-            @Html.DisplayFor(modelItem => item.Ejercicio.Nombre)
-        </td>
-
-        <td>
-            @Html.DisplayFor(modelItem => item.PR)
-        </td>
+            <th>
+                @Html.DisplayNameFor(model => model.PR)
+            </th>
 
 
 
-    </tr>
-}
+            <th></th>
+        </tr>*@
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Ejercicio.Nombre)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.PR)
+            </td>
+
+
+
+        </tr>
+    }
 
 </table>
 <p>

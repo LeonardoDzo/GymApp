@@ -1,126 +1,135 @@
-﻿@using Microsoft.AspNet.Identity
+﻿
+@using Microsoft.AspNet.Identity
 @if (User.IsInRole("Administrador"))
 {
     @*<ul class="nav navbar-nav navbar-left">
-        <li>@Html.ActionLink("Membresias", "Index", "Membresias")</li>
-        <li>@Html.ActionLink("Usuarios", "Index", "User")</li>
-        <li>@Html.ActionLink("Productos", "Index", "Products")</li>
-        <li>@Html.ActionLink("Ingresos", "Index", "Ingresos")</li>
-        <li>@Html.ActionLink("Egresos", "Index", "Egresos")</li>
-        <li>@Html.ActionLink("Ejercicios", "Index", "Ejercicios")</li>
-    </ul>*@
+            <li>@Html.ActionLink("Membresias", "Index", "Membresias")</li>
+            <li>@Html.ActionLink("Usuarios", "Index", "User")</li>
+            <li>@Html.ActionLink("Productos", "Index", "Products")</li>
+            <li>@Html.ActionLink("Ingresos", "Index", "Ingresos")</li>
+            <li>@Html.ActionLink("Egresos", "Index", "Egresos")</li>
+            <li>@Html.ActionLink("Ejercicios", "Index", "Ejercicios")</li>
+        </ul>*@
 
 
-        <ul class="nav navbar-nav">
-            <li><a href="@Url.Action("Index", "Registro")" class="btn"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Registro
-                </a></li>
+    <ul class="nav navbar-nav">
+        <li>
+            <a href="@Url.Action("Index", "Registro")" class="btn">
+                <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Registro
+            </a>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                Administracion Usuarios <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Usuarios", "Index", "User")</li>
+                <li role="separator" class="divider"></li>
+                <li>@Html.ActionLink("Membresias", "Index", "Membresias")</li>
+            </ul>
+        </li>
 
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-Administracion Usuarios <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("Usuarios", "Index", "User")</li>
-                    <li role="separator" class="divider"></li>
-                    <li>@Html.ActionLink("Membresias", "Index", "Membresias")</li>
-                </ul>
-            </li>
-            
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-Configuracion <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("Rutinas", "Index", "Rutinas")</li>
-                    <li role="separator" class="divider"></li>
-                    <li>@Html.ActionLink("Avisos", "Index", "Avisos")</li>
-                    <li role="separator" class="divider"></li>
-                    <li>@Html.ActionLink("Ejercicios", "Index", "Ejercicios")</li>
-                    <li role="separator" class="divider"></li>
-                    <li>@Html.ActionLink("Categorias", "Index", "Categorias")</li>
-                    <li role="separator" class="divider"></li>
-                    <li>@Html.ActionLink("Cuenta Correo", "Index", "Senders")</li>
-                </ul>
-            </li>
-            
-           
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>Financiero <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("Ingresos", "Index", "Ingresos")</li>
-                    <li role="separator" class="divider"></li>
-                    <li>@Html.ActionLink("Egresos", "Index", "Egresos")</li>
-                    <li role="separator" class="divider"></li>
-                    <li>@Html.ActionLink("Balance", "Index", "Balance")</li>
-                    <li role="separator" class="divider"></li>
-                    <li>@Html.ActionLink("Products", "Index", "Products")</li>
-                </ul>
-            </li>
-        </ul>
+
+
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>Financiero <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Balance", "Index", "Balance")</li>
+                <li role="separator" class="divider"></li>
+                <li>@Html.ActionLink("Egresos", "Index", "Egresos")</li>
+                <li role="separator" class="divider"></li>
+
+                <li>@Html.ActionLink("Ingresos", "Index", "Ingresos")</li>
+                <li role="separator" class="divider"></li>
+
+                <li>@Html.ActionLink("Productos", "Index", "Products")</li>
+            </ul>
+        </li>
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                Configuracion <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Avisos", "Index", "Avisos")</li>
+                <li role="separator" class="divider"></li>
+                <li>@Html.ActionLink("Categorias", "Index", "Categorias")</li>
+                <li role="separator" class="divider"></li>
+                <li>@Html.ActionLink("Cuenta Correo", "Index", "Senders")</li>
+                <li role="separator" class="divider"></li>
+                <li>@Html.ActionLink("Ejercicios", "Index", "Ejercicios")</li>
+                <li role="separator" class="divider"></li>
+                <li>@Html.ActionLink("Rutinas", "Index", "Rutinas")</li>
+
+
+            </ul>
+        </li>
+
+    </ul>
 
 
 }
-
-
 
 
 @if (User.IsInRole("Empleado"))
 {
-   
-        <ul class="nav navbar-nav">
-            <li>@Html.ActionLink("Rutinas", "Index", "Rutinas")</li>
-            <li>@Html.ActionLink("Registro", "Index", "Registro")</li>
-       
 
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Financiero <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("Products", "Index", "Products")</li>
-                </ul>
-            </li>
-        </ul>
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Rutinas", "Index", "Rutinas")</li>
+        <li>@Html.ActionLink("Registro", "Index", "Registro")</li>
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Financiero <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Products", "Index", "Products")</li>
+            </ul>
+        </li>
+    </ul>
 
 }
-
-
 
 
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
         if (User.IsInRole("Normal"))
         {
 
-        <ul class="nav navbar-nav">
-          
-            <li><a href="@Url.Action( "Index", "RendimientoEjercicios")" class="btn">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Records </a>
+            <ul class="nav navbar-nav">
+
+                <li>
+                    <a href="@Url.Action( "Index", "RendimientoEjercicios")" class="btn">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Records
+                    </a>
+                </li>
+
+                @*<li>@Html.ActionLink("Records", "Index", "RendimientoEjercicios")</li>*@
+            </ul>
+
+        }
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hola " + User.Identity.Name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
-            
-            @*<li>@Html.ActionLink("Records", "Index", "RendimientoEjercicios")</li>*@
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
         </ul>
-
-      }
-
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hola " + User.Identity.Name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
-    </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav">
-
         <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
         <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-
     </ul>
     <ul class="nav navbar-nav navbar-right">
-       
+
         <li>@Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }
