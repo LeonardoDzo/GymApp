@@ -42,7 +42,7 @@ namespace GymApp.Controllers
             // esta linea muestra todos los ejercicios por usuario
             var rendimientoEjercicio = (from u in db.RendimientoEjercicio where u.AspNetUsers.UserName == User.Identity.Name && u.ejercicioID == ejercicioID select u);
 
-            return View(rendimientoEjercicio.ToList());
+            return PartialView(rendimientoEjercicio.ToList());
         }
 
 

@@ -2,9 +2,9 @@
 @model IEnumerable<GymApp.Models.UserViewModels>
 @using Microsoft.AspNet.Identity
 @{
-    ViewBag.Title = "Usuarios";
+    ViewBag.Title = "Lista de Usuarios";
 }
-<h2>Usuarios</h2>
+<h2>Lista de Usuarios</h2>
 @using (Html.BeginForm("Index", "User", FormMethod.Get, new { @class = "form-inline" }))
 {
     <div class="form-group">
