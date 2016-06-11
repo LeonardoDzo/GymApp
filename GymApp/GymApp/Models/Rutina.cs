@@ -17,6 +17,9 @@ namespace GymApp.Models
         public int Id { get; set; }
         [Display(Name = "Rutina")]
         public string Rutinas { get; set; }
+        [Display(Name = "Día de Rutina")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fini { get; set; }
     }
 }

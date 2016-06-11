@@ -28,8 +28,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.fini, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.fini, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.fini, new { htmlAttributes = new { @class = "form-control datepicker" } })
                 @Html.ValidationMessageFor(model => model.fini, "", new { @class = "text-danger" })
+
             </div>
         </div>
 

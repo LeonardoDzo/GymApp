@@ -38,14 +38,14 @@
 @*<dt>
         @Html.DisplayNameFor(model => model.Rutinas)
     </dt>*@
-<labelC>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Aviso1)
-            </td>
-        </tr>
-    }
-</labelC>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            <labelC>
+                @Html.DisplayFor(modelItem => item.Aviso1)<br>
+            </labelC>
 
+        </td>
+    </tr>
+}
