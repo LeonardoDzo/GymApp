@@ -23,6 +23,7 @@ namespace GymApp.Models
         [DataType(DataType.Currency)]
         public double Monto { get; set; }
         [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime Fecha { get; set; }
     }
 }
