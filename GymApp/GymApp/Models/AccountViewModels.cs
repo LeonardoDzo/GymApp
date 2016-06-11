@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GymApp.Models
@@ -101,8 +102,8 @@ namespace GymApp.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name ="Fecha de Nacimiento")]
-        public System.DateTime FechaNacimiento { get; set; }
+        [Display(Name = "Fecha de Nacimiento")]
+        public System.DateTime FechaNacimiento { get; set; } = DateTime.Parse("2010-01-01");
     }
 
     public class ResetPasswordViewModel

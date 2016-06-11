@@ -31,8 +31,8 @@ namespace GymApp
 
                 var user = new ApplicationUser();
                 user.UserName = "Administrador@gmail.com";
-                user.FirstName = "Diego";
-                user.LastName = "Navarro";
+                user.FirstName = "Admin";
+                user.LastName = "Nuevo";
                 user.Email = "Administrador@gmail.com";
 
                 string userPWD = "Admin123";
