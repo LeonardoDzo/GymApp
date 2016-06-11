@@ -22,6 +22,8 @@ namespace GymApp.Models
         public string PR { get; set; }
         [DataType(DataType.DateTime)]
         [Display(Name = "Fecha")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+
         public System.DateTime fecha { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }

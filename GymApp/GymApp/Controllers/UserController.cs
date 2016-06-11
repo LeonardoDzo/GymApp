@@ -225,7 +225,7 @@ namespace GymApp.Controllers
                         usumem.fInicio = model.fInicio;
                         usumem.ffin = model.ffin;
                         db.Entry(usumem).State = EntityState.Modified;
-                        if( usumem.tipoMembresia != model.tipoMembresia || (model.ffin != usumem.ffin && model.fInicio != usumem.fInicio) || model.ffin > model.fInicio)
+                        if (usumem.tipoMembresia != model.tipoMembresia || (model.ffin != usumem.ffin && model.fInicio != usumem.fInicio) || model.ffin >= model.fInicio)
                         {
                             Ingresos ingreso = new Ingresos();
                             ingreso.Fecha = DateTime.Now;

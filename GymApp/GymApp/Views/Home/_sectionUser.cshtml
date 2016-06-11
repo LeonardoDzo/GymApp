@@ -1,48 +1,89 @@
 ﻿@model GymApp.Models.UserViewModels
-<input id="error" value=@ViewBag.error type="hidden" />
-<div>
+@if (Model.ffin < DateTime.Now)
+{
+    <div >
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.tipoMembresia)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.tipoMembresia)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ffin)
+            </dt>
 
-    <hr />
-    <dl class="dl-horizontal">
+                <dd>
+                    @Html.DisplayFor(model => model.ffin)
+                </dd>
+            <div style="background-color:red">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
+                <h3>@ViewBag.restante</h3>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+</dl>
+    </div>
+}
+else
+{
+    <div>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+        <hr />
+        <dl class="dl-horizontal">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tipoMembresia)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tipoMembresia)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ffin)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ffin)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
 
-        <h3>@ViewBag.restante</h3>
-       
-        
+            <dt>
+                @Html.DisplayNameFor(model => model.tipoMembresia)
+            </dt>
 
-    </dl>
-</div>
+            <dd>
+                @Html.DisplayFor(model => model.tipoMembresia)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ffin)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ffin)
+            </dd>
+
+            <h3>@ViewBag.restante</h3>
+
+
+
+        </dl>
+    </div>
+}
 @*<p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
