@@ -30,17 +30,30 @@ namespace GymApp
                 rolManager.Create(role);
 
                 var user = new ApplicationUser();
-                user.UserName = "Administrador@gmail.com";
+                user.UserName = "Admin@gmail.com";
                 user.FirstName = "Admin";
                 user.LastName = "Nuevo";
-                user.Email = "Administrador@gmail.com";
+                user.Email = "leo.dd@hotmail.es";
 
-                string userPWD = "Admin123";
+                string userPWD = "Admin 123";
                 var chkuser = userManager.Create(user, userPWD);
                 if(chkuser.Succeeded)
                 {
                     var reulst1 = userManager.AddToRole(user.Id, "Administrador");
                     
+                }
+                var user2 = new ApplicationUser();
+                user2.UserName = "DiegoNavarro";
+                user2.FirstName = "Diego";
+                user2.LastName = "Navarro";
+                user2.Email = "Navarro.diego@gmail.com";
+
+                string userPWD2 = "DiegoNavarro7!";
+                var chkuser2 = userManager.Create(user2, userPWD2);
+                if (chkuser2.Succeeded)
+                {
+                    var reulst2 = userManager.AddToRole(user2.Id, "Administrador");
+
                 }
             }
 
